@@ -4,22 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.Protocol;
 import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
 public class Example02_PutMetadata {
@@ -31,7 +22,7 @@ public class Example02_PutMetadata {
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
 		// The location in HCP where this file will be stored.
 		String key = "folder/subfolder/" + file.getName();
-		String bucketName = "test1";
+		String bucketName = "cloud";
 
 		{
 			try {
@@ -49,7 +40,6 @@ public class Example02_PutMetadata {
 				ObjectMetadata metadataFromHCP = hs3Client.getObjectMetadata(bucketName, key);
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				Map<String, String> map = metadataFromHCP.getUserMetadata();
-				
 				// Verify contents.
 				assertTrue("Rison".equals(map.get("name")));
 				assertTrue("hitachi vantara".equals(map.get("company")));
