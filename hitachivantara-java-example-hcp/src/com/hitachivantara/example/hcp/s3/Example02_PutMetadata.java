@@ -27,8 +27,6 @@ public class Example02_PutMetadata {
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();
 		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 		// Here is the file will be uploaded into HCP
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
 		// The location in HCP where this file will be stored.
@@ -42,10 +40,14 @@ public class Example02_PutMetadata {
 				metadata.addUserMetadata("company", "hitachi vantara");
 
 				// Inject file into HCP system.
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				hs3Client.putObject(new PutObjectRequest(bucketName, key, file).withMetadata(metadata));
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Get metadata from HCP
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				ObjectMetadata metadataFromHCP = hs3Client.getObjectMetadata(bucketName, key);
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				Map<String, String> map = metadataFromHCP.getUserMetadata();
 				
 				// Verify contents.
@@ -61,7 +63,6 @@ public class Example02_PutMetadata {
 			
 			System.out.println("Well done!");
 		}
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	}
 
 }

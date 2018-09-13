@@ -22,7 +22,6 @@ public class Example01_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = null;
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
 			// 创建S3客户端，只需要创建一次客户端，请将endpoint及用户名密码更改为您的HCP配置
 			// Create s3 client
@@ -44,8 +43,6 @@ public class Example01_PutGetDeleteObject {
 					.build();
 		}
 		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
 		S3Object s3Object = null;
 		// Here is the file will be uploaded into HCP
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
@@ -57,14 +54,20 @@ public class Example01_PutGetDeleteObject {
 			try {
 				// Put这个文件至HCP
 				// Inject file into HCP system.
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				hs3Client.putObject(bucketName, key, file);
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Check whether object exist.
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				boolean exist = hs3Client.doesObjectExist(bucketName, key);
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				assertTrue(exist == true);
 
 				// Get the object from HCP
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				s3Object = hs3Client.getObject(bucketName, key);
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			} catch (AmazonServiceException e) {
 				e.printStackTrace();
 				return;
@@ -73,7 +76,6 @@ public class Example01_PutGetDeleteObject {
 				return;
 			}
 		}
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		// Verify result:
 		S3ObjectInputStream in = s3Object.getObjectContent();
@@ -84,19 +86,17 @@ public class Example01_PutGetDeleteObject {
 		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
 		assertTrue(equals == true);
 		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
 		{
 			// Delete object in HCP.
+			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			hs3Client.deleteObject(bucketName, key);
+			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			
 			// Check whether object exist.
 			boolean exist = hs3Client.doesObjectExist(bucketName, key);
 			assertTrue(exist == false);
 		}
 		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 		System.out.println("Well done!");
 	}
 

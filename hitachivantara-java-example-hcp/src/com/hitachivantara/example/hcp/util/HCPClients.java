@@ -16,18 +16,25 @@ import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 
-import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.hitachivantara.core.http.ClientConfiguration;
+import com.hitachivantara.hcp.build.HCPClientBuilder;
+import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
+import com.hitachivantara.hcp.common.auth.BasicCredentials;
+import com.hitachivantara.hcp.common.ex.HCPException;
+import com.hitachivantara.hcp.common.ex.InvalidResponseException;
+import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 
 public class HCPClients {
 
 	private static HCPClients instance = new HCPClients();
 
 	private AmazonS3 hs3Client = null;
+	private HCPStandardClient hcpClient = null;
 
 	private HCPClients() {
 	}
@@ -47,7 +54,7 @@ public class HCPClients {
 
 			com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
 			// Using HTTP protocol
-			clientConfig.setProtocol(Protocol.HTTP);
+			clientConfig.setProtocol(com.amazonaws.Protocol.HTTP);
 			clientConfig.setSignerOverride("S3SignerType");
 
 			hs3Client = AmazonS3ClientBuilder.standard()
@@ -58,6 +65,31 @@ public class HCPClients {
 		}
 
 		return hs3Client;
+	}
+
+	public HCPStandardClient getHCPClient() throws HCPException {
+		if (hcpClient == null) {
+			// Create s3 client
+			String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
+			String namespace = "cloud";
+			// The AWS access key (admin) encoded by Base64
+			String accessKey = "YWRtaW4=";
+			// The AWS secret access key (P@ssw0rd) encrypted by MD5
+			String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
+
+			ClientConfiguration clientConfig = new ClientConfiguration();
+			// Using HTTP protocol
+			clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTP);
+
+			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
+			hcpClient = builder.withClientConfiguration(clientConfig)
+					.withCredentials(new BasicCredentials(accessKey, secretKey))
+					.withEndpoint(endpoint)
+					.withNamespace(namespace)
+					.bulid();
+		}
+
+		return hcpClient;
 	}
 
 }

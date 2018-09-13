@@ -26,7 +26,6 @@ public class Example01_PutGetDeleteObject {
 		HCPStandardClient hcpClient = null;
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
-			// 创建S3客户端，只需要创建一次客户端，请将endpoint及用户名密码更改为您的HCP配置
 			// Create s3 client
 			String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
 			String namespace = "cloud";
@@ -40,7 +39,11 @@ public class Example01_PutGetDeleteObject {
 			clientConfig.setProtocol(Protocol.HTTP);
 
 			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
-			hcpClient = builder.withClientConfiguration(clientConfig).withCredentials(new BasicCredentials(accessKey, secretKey)).withEndpoint(endpoint).withNamespace(namespace)
+			hcpClient = builder
+					.withClientConfiguration(clientConfig)
+					.withCredentials(new BasicCredentials(accessKey, secretKey))
+					.withEndpoint(endpoint)
+					.withNamespace(namespace)
 					.bulid();
 		}
 

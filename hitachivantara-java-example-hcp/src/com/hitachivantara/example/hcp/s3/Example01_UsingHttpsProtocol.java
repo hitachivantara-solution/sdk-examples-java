@@ -29,7 +29,6 @@ public class Example01_UsingHttpsProtocol {
 
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = null;
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
 			// 创建S3客户端，只需要创建一次客户端，请将endpoint及用户名密码更改为您的HCP配置
 			// Create s3 client
@@ -45,6 +44,7 @@ public class Example01_UsingHttpsProtocol {
 			clientConfig.setSignerOverride("S3SignerType");
 
 			// 全部信任 不做身份鉴定
+			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			try {
 				SSLContextBuilder builder = new SSLContextBuilder();
 				builder.loadTrustMaterial(null, new TrustStrategy() {
@@ -60,6 +60,7 @@ public class Example01_UsingHttpsProtocol {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 			hs3Client = AmazonS3ClientBuilder.standard()
 					.withClientConfiguration(clientConfig)
@@ -67,8 +68,6 @@ public class Example01_UsingHttpsProtocol {
 					.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
 					.build();
 		}
-		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		S3Object s3Object = null;
 		// Here is the file will be uploaded into HCP
@@ -97,7 +96,6 @@ public class Example01_UsingHttpsProtocol {
 				return;
 			}
 		}
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		// Verify result:
 		S3ObjectInputStream in = s3Object.getObjectContent();
@@ -108,8 +106,6 @@ public class Example01_UsingHttpsProtocol {
 		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
 		assertTrue(equals == true);
 		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
 		{
 			// Delete object in HCP.
 			hs3Client.deleteObject(bucketName, key);
@@ -118,8 +114,6 @@ public class Example01_UsingHttpsProtocol {
 			boolean exist = hs3Client.doesObjectExist(bucketName, key);
 			assertTrue(exist == false);
 		}
-		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		System.out.println("Well done!");
 	}
