@@ -33,8 +33,8 @@ public class Example01_UsingHttpsProtocol {
 			// 创建S3客户端，只需要创建一次客户端，请将endpoint及用户名密码更改为您的HCP配置
 			// Create s3 client
 			String endpoint = "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab";
-			// The AWS access key (admin) encoded by Base64
-			String accessKey = "YWRtaW4=";
+			// The AWS access key (user1) encoded by Base64
+			String accessKey = "dXNlcjE=";
 			// The AWS secret access key (P@ssw0rd) encrypted by MD5
 			String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
 
