@@ -80,7 +80,7 @@ public class S3Example_HCPMultipartUpload {
 					@Override
 					public void complete(String bucketName, String objectPath, String uploadId, Long uploadedSize, long startTime, long endTime) {
 						log.println("Step 3: Complete... [" + objectPath + "] [" + uploadId + "]");
-						
+
 						// 通過計算两侧文件的MD5验证上传数据是否正确
 						// **此处验证为验证上传正确性代码-实际开发无需此操作**
 						try {
@@ -102,7 +102,16 @@ public class S3Example_HCPMultipartUpload {
 				});
 		// =========================================================================================================================
 
-		// exec.uploadPart(partIndex);
+		// =========================================================================================================================
+		// // 以下为断点上传示例
+		// // 上次未完成的分片上传id编号
+		// String uploadId = "xxxxx";
+		// MulitipartUploaderExecutor exec2 = new MulitipartUploaderExecutor(s3Client, bucketName, objectPath, tobeUploadFile, PART_SIZE, uploadId);
+		// // 再次上传上传失败的分片编号例=第三片3
+		// exec2.uploadPart(3);
+		// // 合并分片
+		// exec2.complete();
+		// =========================================================================================================================
 
 	}
 

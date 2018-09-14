@@ -8,6 +8,7 @@ import java.io.InputStream;
 
 /**
  * 提供文件分片功能，根据指定分片大小将一个大文件分为若干小文件（FileInputstream）供分片上传
+ * 
  * @author sohan
  *
  */
@@ -19,11 +20,12 @@ public class FilePartDataProvider implements PartDateProvider {
 	private final long FILE_SIZE;
 
 	private int remainCount;
-	private long remainSize;
+	// private long remainSize;
 	private int currentIndex = 1;
 
 	/**
 	 * 文件分片Provider
+	 * 
 	 * @param file
 	 * @param partSize
 	 * @throws MulitipartUploadException
@@ -33,7 +35,7 @@ public class FilePartDataProvider implements PartDateProvider {
 		if (partSize < 5 * 1024 * 1024) {
 			throw new MulitipartUploadException("Your proposed upload is smaller than the minimum allowed size(5M)");
 		}
-		
+
 		this.SOURCE_FILE = file;
 
 		this.FILE_SIZE = file.length();
@@ -43,7 +45,7 @@ public class FilePartDataProvider implements PartDateProvider {
 
 		this.currentIndex = 1;
 		this.remainCount = PART_COUNT;
-		this.remainSize = FILE_SIZE;
+		// this.remainSize = FILE_SIZE;
 	}
 
 	@Override
@@ -56,31 +58,33 @@ public class FilePartDataProvider implements PartDateProvider {
 
 		currentIndex++;
 		remainCount--;
-		remainSize -= PART_SIZE;
+		// remainSize -= PART_SIZE;
 
 		return partData;
 	}
 
 	@Override
-	public PartData partData(int partIndex) throws MulitipartUploadException {
-		if (partIndex <= 0 || partIndex > PART_SIZE) {
+	public PartData partData(int partNumber) throws MulitipartUploadException {
+		if (partNumber <= 0 || partNumber > PART_SIZE) {
 			throw new MulitipartUploadException("Part index out of range.");
 		}
 
 		InputStream in = null;
+		long startIndex = 0;
 		try {
 			in = new FileInputStream(SOURCE_FILE);
-			long startIndex = 0;
-			if (partIndex != 1) {
-				startIndex = (partIndex - 1) * PART_SIZE;
+			if (partNumber != 1) {
+				startIndex = (partNumber - 1) * PART_SIZE;
 				in.skip(startIndex);
 			}
 		} catch (Exception e) {
 			throw new MulitipartUploadException(e);
 		}
 
+		long remainSize = FILE_SIZE - startIndex;
+
 		long uploadPartsize = Math.min(PART_SIZE, remainSize);
-		PartData partData = new PartData(currentIndex, in, uploadPartsize);
+		PartData partData = new PartData(partNumber, in, uploadPartsize);
 
 		return partData;
 	}

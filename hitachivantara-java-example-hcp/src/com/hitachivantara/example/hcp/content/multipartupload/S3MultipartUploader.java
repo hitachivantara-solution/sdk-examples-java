@@ -37,10 +37,15 @@ public class S3MultipartUploader {
 	private long endTime;
 
 	public S3MultipartUploader(AmazonS3 hs3Client, String bucketName, String objectPath, long expectObjectSize) {
+		this(hs3Client, bucketName, objectPath, expectObjectSize, null);
+	}
+
+	public S3MultipartUploader(AmazonS3 hs3Client, String bucketName, String objectPath, long expectObjectSize, String uploadId) {
 		this.hs3Client = hs3Client;
 		this.bucketName = bucketName;
 		this.objectPath = objectPath;
 		this.expectObjectSize = expectObjectSize;
+		this.uploadId = uploadId;
 	}
 
 	public void setHandler(UploadEventHandler handler) {
@@ -55,10 +60,10 @@ public class S3MultipartUploader {
 			InitiateMultipartUploadRequest initRequest = new InitiateMultipartUploadRequest(bucketName, objectPath);
 			InitiateMultipartUploadResult initResponse = hs3Client.initiateMultipartUpload(initRequest);
 			uploadId = initResponse.getUploadId();
-		}
 
-		if (handler != null) {
-			handler.init(bucketName, objectPath, uploadId);
+			if (handler != null) {
+				handler.init(bucketName, objectPath, uploadId);
+			}
 		}
 
 		return uploadId;
@@ -82,10 +87,19 @@ public class S3MultipartUploader {
 
 		PartETag result = null;
 		try {
-			//上传分片
+			// 上传分片
 			result = hs3Client.uploadPart(uploadRequest).getPartETag();
 			endTime = System.currentTimeMillis();
 			partETags.add(result);
+
+			if (handler != null) {
+				handler.afterPartUpload(bucketName, objectPath, uploadId, partNumber, uploadPartsize, startTime, endTime);
+			}
+
+			synchronized (uploadedSize) {
+				uploadedSize += uploadPartsize;
+			}
+
 		} catch (Exception e) {
 			endTime = System.currentTimeMillis();
 
@@ -94,39 +108,36 @@ public class S3MultipartUploader {
 			}
 		}
 
-		if (handler != null) {
-			handler.afterPartUpload(bucketName, objectPath, uploadId, partNumber, uploadPartsize, startTime, endTime);
-		}
+		return result;
+	}
 
-		synchronized (uploadedSize) {
-			uploadedSize += uploadPartsize;
+	public CompleteMultipartUploadResult complete() throws MulitipartUploadException {
+		// Step 3: Complete.
+		CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucketName, objectPath, uploadId, partETags);
+
+		// 合并各个分片为一个整体文件
+		CompleteMultipartUploadResult result = hs3Client.completeMultipartUpload(compRequest);
+
+		endTime = System.currentTimeMillis();
+
+		if (handler != null) {
+			handler.complete(bucketName, objectPath, uploadId, uploadedSize, startTime, endTime);
 		}
 
 		return result;
 	}
 
-	public CompleteMultipartUploadResult complete() throws MulitipartUploadException {
+	protected CompleteMultipartUploadResult autocomplete() throws MulitipartUploadException {
 		if (uploadedSize == expectObjectSize) {
-			// Step 3: Complete.
-			CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucketName, objectPath, uploadId, partETags);
-
-			// 合并各个分片为一个整体文件
-			CompleteMultipartUploadResult result = hs3Client.completeMultipartUpload(compRequest);
-
-			endTime = System.currentTimeMillis();
-			
-			if (handler != null) {
-				handler.complete(bucketName, objectPath, uploadId, uploadedSize, startTime, endTime);
-			}
-
-			return result;
+			return complete();
 		} else {
-			throw new MulitipartUploadException(objectPath + " uncompleted! " + uploadedSize + "/" + expectObjectSize);
+			// throw new MulitipartUploadException(objectPath + " uncompleted! " + uploadedSize + "/" + expectObjectSize);
+			return null;
 		}
 	}
 
 	public void abortMultipartUpload() {
-		//清除分片上传的数据（当希望清除失败的分片上传任务时才调用此函数）
+		// 清除分片上传的数据（当希望清除失败的分片上传任务时才调用此函数）
 		hs3Client.abortMultipartUpload(new AbortMultipartUploadRequest(bucketName, objectPath, uploadId));
 		uploadId = null;
 	}
