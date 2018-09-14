@@ -20,7 +20,7 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.io.HCPInputStream;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
-public class RestExample01_PutGetDeleteObject {
+public class RestExample_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException, HCPException {
 		HCPStandardClient hcpClient = null;

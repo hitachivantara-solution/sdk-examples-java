@@ -15,7 +15,7 @@ import com.hitachivantara.example.hcp.content.multipartupload.MulitipartUploader
 import com.hitachivantara.example.hcp.content.multipartupload.UploadEventHandler;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
-public class S3Example30_HCPMultipartUpload {
+public class S3Example_HCPMultipartUpload {
 	public static void main(String[] args) throws MulitipartUploadException {
 		// 取得客户端Instance
 		final AmazonS3 s3Client = HCPClients.getInstance().getS3Client();

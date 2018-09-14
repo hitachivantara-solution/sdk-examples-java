@@ -13,7 +13,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
-public class S3Example02_PutMetadata {
+public class S3Example_PutMetadata {
 
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();

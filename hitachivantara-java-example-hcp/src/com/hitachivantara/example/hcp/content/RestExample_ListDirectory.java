@@ -17,7 +17,7 @@ import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntrys;
 import com.hitachivantara.hcp.standard.model.request.impl.ListDirectoryRequest;
 
-public class RestExample03_ListDirectory {
+public class RestExample_ListDirectory {
 
 	public static void main(String[] args) throws IOException {
 		{

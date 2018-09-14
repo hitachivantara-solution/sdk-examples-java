@@ -19,7 +19,7 @@ import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntrys;
 import com.hitachivantara.hcp.standard.model.request.impl.ListObjectRequest;
 
-public class RestExample03_ListObjects {
+public class RestExample_ListObjects {
 
 	public static void main(String[] args) throws IOException {
 		{

@@ -13,7 +13,7 @@ import com.amazonaws.services.s3.model.S3VersionSummary;
 import com.amazonaws.services.s3.model.VersionListing;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
-public class S3Example04_CreateGetListVersions {
+public class S3Example_CreateGetListVersions {
 
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();

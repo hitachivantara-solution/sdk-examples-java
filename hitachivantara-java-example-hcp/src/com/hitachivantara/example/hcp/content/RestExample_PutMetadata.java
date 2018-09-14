@@ -21,7 +21,7 @@ import com.hitachivantara.hcp.standard.model.metadata.HCPMetadata;
 import com.hitachivantara.hcp.standard.model.metadata.S3CompatibleMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
-public class RestExample02_PutMetadata {
+public class RestExample_PutMetadata {
 
 	public static void main(String[] args) throws IOException {
 		// Here is the file will be uploaded into HCP

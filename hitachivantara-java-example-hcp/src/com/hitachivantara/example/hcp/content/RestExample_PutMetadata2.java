@@ -22,7 +22,7 @@ import com.hitachivantara.hcp.standard.model.metadata.S3CompatibleMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.PutMetadataRequest;
 import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
-public class RestExample02_PutMetadata2 {
+public class RestExample_PutMetadata2 {
 
 	public static void main(String[] args) throws IOException {
 		// Here is the file will be uploaded into HCP
@@ -43,7 +43,7 @@ public class RestExample02_PutMetadata2 {
 				hcpClient.putS3Metadata(key, metadata);
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
-				Document doc = RestExample02_PutMetadata.createDocument();
+				Document doc = RestExample_PutMetadata.createDocument();
 
 				// Attach Custom METADATA with specific key
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
