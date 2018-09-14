@@ -31,8 +31,8 @@ public class RestExample_PutGetDeleteObject {
 			String namespace = "cloud";
 			// The access key (user1) encoded by Base64
 			String accessKey = "dXNlcjE=";
-			// The secret access key (P@ssw0rd) encrypted by MD5
-			String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
+			// The secret access key (hcp1234567) encrypted by MD5
+			String secretKey = "c0658942779dfbd4b4d6e59735b0c846";
 
 			ClientConfiguration clientConfig = new ClientConfiguration();
 			// Using HTTP protocol

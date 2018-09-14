@@ -48,9 +48,9 @@ public class HCPClients {
 			// Create s3 client
 			String endpoint = "tn9.hcp8.hdim.lab";
 			// The AWS access key (user1) encoded by Base64
-			String accessKey = "dXNlcjE=";
-			// The AWS secret access key (P@ssw0rd) encrypted by MD5
-			String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
+			String accessKey = "dXNlcjE="; 
+			// The AWS secret access key (hcp1234567) encrypted by MD5
+			String secretKey = "c0658942779dfbd4b4d6e59735b0c846";
 
 			com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
 			// Using HTTP protocol
@@ -73,9 +73,9 @@ public class HCPClients {
 			String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
 			String namespace = "cloud";
 			// The access key (user1) encoded by Base64
-			String accessKey = "dXNlcjE=";
-			// The secret access key (P@ssw0rd) encrypted by MD5
-			String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
+			String accessKey = "dXNlcjE="; 
+			// The AWS secret access key (hcp1234567) encrypted by MD5
+			String secretKey = "c0658942779dfbd4b4d6e59735b0c846";
 
 			ClientConfiguration clientConfig = new ClientConfiguration();
 			// Using HTTP protocol
