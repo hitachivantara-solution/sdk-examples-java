@@ -1,4 +1,4 @@
-package com.hitachivantara.example.hcp.rest;
+package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntrys;
 import com.hitachivantara.hcp.standard.model.request.impl.ListDirectoryRequest;
 
-public class Example03_ListDirectory {
+public class RestExample03_ListDirectory {
 
 	public static void main(String[] args) throws IOException {
 		{

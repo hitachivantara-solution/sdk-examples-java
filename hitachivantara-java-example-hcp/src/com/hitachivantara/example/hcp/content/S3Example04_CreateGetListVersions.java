@@ -1,4 +1,4 @@
-package com.hitachivantara.example.hcp.s3;
+package com.hitachivantara.example.hcp.content;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import com.amazonaws.services.s3.model.S3VersionSummary;
 import com.amazonaws.services.s3.model.VersionListing;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
-public class Example04_CreateGetListVersions {
+public class S3Example04_CreateGetListVersions {
 
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();

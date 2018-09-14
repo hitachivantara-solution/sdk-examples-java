@@ -1,17 +1,10 @@
-package com.hitachivantara.example.hcp.s3;
+package com.hitachivantara.example.hcp.content;
 
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.Arrays;
-
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustStrategy;
-import org.apache.http.ssl.SSLContextBuilder;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.Protocol;
@@ -25,42 +18,23 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.hitachivantara.common.util.DigestUtils;
 
-public class Example01_UsingHttpsProtocol {
+public class S3Example01_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = null;
 		{
 			// 创建S3客户端，只需要创建一次客户端，请将endpoint及用户名密码更改为您的HCP配置
 			// Create s3 client
-			String endpoint = "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab";
+			String endpoint = "tenant1.hcp-demo.hcpdemo.com";//"tn9.hcp8.hdim.lab";
 			// The AWS access key (user1) encoded by Base64
 			String accessKey = "dXNlcjE=";
 			// The AWS secret access key (P@ssw0rd) encrypted by MD5
 			String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
 
 			com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
-			// Using HTTPS protocol
-			clientConfig.setProtocol(Protocol.HTTPS);
+			// Using HTTP protocol
+			clientConfig.setProtocol(Protocol.HTTP);
 			clientConfig.setSignerOverride("S3SignerType");
-
-			// 全部信任 不做身份鉴定
-			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-			try {
-				SSLContextBuilder builder = new SSLContextBuilder();
-				builder.loadTrustMaterial(null, new TrustStrategy() {
-					public boolean isTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
-						return true;
-					}
-				});
-
-				SSLConnectionSocketFactory sslsf = null;
-				sslsf = new SSLConnectionSocketFactory(builder.build(), new String[] { "SSLv2Hello", "SSLv3", "TLSv1", "TLSv1.2" }, null, NoopHostnameVerifier.INSTANCE);
-
-				clientConfig.getApacheHttpClientConfig().setSslSocketFactory(sslsf);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 			hs3Client = AmazonS3ClientBuilder.standard()
 					.withClientConfiguration(clientConfig)
@@ -80,14 +54,20 @@ public class Example01_UsingHttpsProtocol {
 			try {
 				// Put这个文件至HCP
 				// Inject file into HCP system.
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				hs3Client.putObject(bucketName, key, file);
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Check whether object exist.
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				boolean exist = hs3Client.doesObjectExist(bucketName, key);
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				assertTrue(exist == true);
 
 				// Get the object from HCP
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				s3Object = hs3Client.getObject(bucketName, key);
+				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			} catch (AmazonServiceException e) {
 				e.printStackTrace();
 				return;
@@ -108,13 +88,15 @@ public class Example01_UsingHttpsProtocol {
 		
 		{
 			// Delete object in HCP.
+			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			hs3Client.deleteObject(bucketName, key);
+			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			
 			// Check whether object exist.
 			boolean exist = hs3Client.doesObjectExist(bucketName, key);
 			assertTrue(exist == false);
 		}
-
+		
 		System.out.println("Well done!");
 	}
 

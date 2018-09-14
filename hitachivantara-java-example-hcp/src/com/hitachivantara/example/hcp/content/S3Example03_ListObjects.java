@@ -1,4 +1,4 @@
-package com.hitachivantara.example.hcp.s3;
+package com.hitachivantara.example.hcp.content;
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,7 +26,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
-public class Example03_ListObjects {
+public class S3Example03_ListObjects {
 
 	public static void main(String[] args) throws IOException {
 		AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();

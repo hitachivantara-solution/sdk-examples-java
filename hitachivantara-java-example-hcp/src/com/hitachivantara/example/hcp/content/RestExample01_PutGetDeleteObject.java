@@ -1,4 +1,4 @@
-package com.hitachivantara.example.hcp.rest;
+package com.hitachivantara.example.hcp.content;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,7 +20,7 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.io.HCPInputStream;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
-public class Example01_PutGetDeleteObject {
+public class RestExample01_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException, HCPException {
 		HCPStandardClient hcpClient = null;
