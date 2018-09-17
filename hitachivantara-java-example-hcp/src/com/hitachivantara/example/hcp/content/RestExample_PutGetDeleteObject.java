@@ -20,6 +20,12 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.io.HCPInputStream;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
+/**
+ * 对象存储取得删除示例
+ * 包括创建client端
+ * @author sohan
+ *
+ */
 public class RestExample_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException, HCPException {

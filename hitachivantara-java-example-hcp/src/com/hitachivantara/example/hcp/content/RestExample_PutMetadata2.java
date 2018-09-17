@@ -22,6 +22,11 @@ import com.hitachivantara.hcp.standard.model.metadata.S3CompatibleMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.PutMetadataRequest;
 import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
+/**
+ * 存取S3标准metadata示例
+ * @author sohan
+ *
+ */
 public class RestExample_PutMetadata2 {
 
 	public static void main(String[] args) throws IOException {

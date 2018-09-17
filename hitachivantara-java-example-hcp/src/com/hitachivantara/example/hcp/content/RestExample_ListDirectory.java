@@ -17,6 +17,11 @@ import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntrys;
 import com.hitachivantara.hcp.standard.model.request.impl.ListDirectoryRequest;
 
+/**
+ * 列出当前目录下所有对象的示例
+ * @author sohan
+ *
+ */
 public class RestExample_ListDirectory {
 
 	public static void main(String[] args) throws IOException {

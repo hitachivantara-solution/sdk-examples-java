@@ -21,6 +21,11 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.io.HCPInputStream;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
+/**
+ * HCP存储路径最佳实践示例
+ * @author sohan
+ *
+ */
 public class RestExample_PathOptimizing {
 
 	public static void main(String[] args) throws IOException, HCPException {

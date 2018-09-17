@@ -18,6 +18,11 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.hitachivantara.common.util.DigestUtils;
 
+/**
+ * S3 对象文件存、删、取示例
+ * @author sohan
+ *
+ */
 public class S3Example_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException {

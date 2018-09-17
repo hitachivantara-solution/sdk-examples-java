@@ -19,6 +19,11 @@ import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntrys;
 import com.hitachivantara.hcp.standard.model.request.impl.ListObjectRequest;
 
+/**
+ * 列出指定目录下所有对象的示例，包括子目录
+ * @author sohan
+ *
+ */
 public class RestExample_ListObjects {
 
 	public static void main(String[] args) throws IOException {

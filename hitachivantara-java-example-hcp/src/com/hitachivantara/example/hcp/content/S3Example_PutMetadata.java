@@ -13,6 +13,11 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
+/**
+ * S3 存取元数据示例
+ * @author sohan
+ *
+ */
 public class S3Example_PutMetadata {
 
 	public static void main(String[] args) throws IOException {

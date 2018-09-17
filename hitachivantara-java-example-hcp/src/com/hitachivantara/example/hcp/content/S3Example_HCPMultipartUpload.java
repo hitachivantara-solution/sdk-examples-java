@@ -15,6 +15,11 @@ import com.hitachivantara.example.hcp.content.multipartupload.MulitipartUploader
 import com.hitachivantara.example.hcp.content.multipartupload.UploadEventHandler;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
+/**
+ * S3 分片上传示例
+ * @author sohan
+ *
+ */
 public class S3Example_HCPMultipartUpload {
 	public static void main(String[] args) throws MulitipartUploadException {
 		// 取得客户端Instance

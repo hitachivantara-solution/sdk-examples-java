@@ -26,6 +26,11 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
+/**
+ * S3 列出目录包括子目录示例
+ * @author sohan
+ *
+ */
 public class S3Example_ListObjects {
 
 	public static void main(String[] args) throws IOException {

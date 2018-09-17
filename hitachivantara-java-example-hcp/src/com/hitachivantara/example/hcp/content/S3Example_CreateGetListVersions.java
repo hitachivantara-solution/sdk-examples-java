@@ -13,6 +13,11 @@ import com.amazonaws.services.s3.model.S3VersionSummary;
 import com.amazonaws.services.s3.model.VersionListing;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
+/**
+ * S3 SDK方式列出版本示例
+ * @author sohan
+ *
+ */
 public class S3Example_CreateGetListVersions {
 
 	public static void main(String[] args) throws IOException {
