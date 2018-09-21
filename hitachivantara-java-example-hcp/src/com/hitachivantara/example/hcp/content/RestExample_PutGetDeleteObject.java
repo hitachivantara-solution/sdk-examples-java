@@ -59,7 +59,7 @@ public class RestExample_PutGetDeleteObject {
 		// Here is the file will be uploaded into HCP
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
 		// The location in HCP where this file will be stored.
-		String key = "folder/subfolder/" + "简体繁體"+file.getName();
+		String key = "folder/subfolder/" + file.getName();
 
 		{
 			// Put这个文件至HCP
@@ -92,14 +92,14 @@ public class RestExample_PutGetDeleteObject {
 
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		{
-			// Delete object in HCP.
-			hcpClient.deleteObject(key);
-
-			// Check whether object exist.
-			boolean exist = hcpClient.doesObjectExist(key);
-			assertTrue(exist == false);
-		}
+//		{
+//			// Delete object in HCP.
+//			hcpClient.deleteObject(key);
+//
+//			// Check whether object exist.
+//			boolean exist = hcpClient.doesObjectExist(key);
+//			assertTrue(exist == false);
+//		}
 
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
