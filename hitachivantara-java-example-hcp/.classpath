@@ -8,7 +8,6 @@
 	<classpathentry kind="lib" path="lib/aws-java-sdk-kms-1.11.356.jar"/>
 	<classpathentry kind="lib" path="lib/aws-java-sdk-s3-1.11.356.jar" sourcepath="C:/Users/sohan/.m2/repository/com/amazonaws/aws-java-sdk-s3/1.11.356/aws-java-sdk-s3-1.11.356-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.3.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/ion-java-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-annotations-2.9.5.jar"/>
