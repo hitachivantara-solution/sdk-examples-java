@@ -51,7 +51,7 @@ public class RestExample_PutMetadata {
 
 				// Get metadata from HCP
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				S3CompatibleMetadata metadataFromHCP = hcpClient.getS3Metadata(key);
+				S3CompatibleMetadata metadataFromHCP = hcpClient.getMetadata(key);
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				HCPMetadata meta = hcpClient.getMetadata(key, "moreInfo");
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*

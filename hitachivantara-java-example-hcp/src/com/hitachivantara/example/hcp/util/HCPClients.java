@@ -79,7 +79,7 @@ public class HCPClients {
 
 			ClientConfiguration clientConfig = new ClientConfiguration();
 			// Using HTTP protocol
-			clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTP);
+			clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTPS);
 
 			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
 			hcpClient = builder.withClientConfiguration(clientConfig)

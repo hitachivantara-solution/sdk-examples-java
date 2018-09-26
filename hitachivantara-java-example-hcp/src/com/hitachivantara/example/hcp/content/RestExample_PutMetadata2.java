@@ -45,7 +45,7 @@ public class RestExample_PutMetadata2 {
 				
 				// Attach S3 Compatible METADATA with specific key
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				hcpClient.putS3Metadata(key, metadata);
+				hcpClient.putMetadata(key, metadata);
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				Document doc = RestExample_PutMetadata.createDocument();
@@ -56,7 +56,7 @@ public class RestExample_PutMetadata2 {
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				
 				// Get metadata from HCP
-				S3CompatibleMetadata metadataFromHCP = hcpClient.getS3Metadata(key);
+				S3CompatibleMetadata metadataFromHCP = hcpClient.getMetadata(key);
 				HCPMetadata meta = hcpClient.getMetadata(key, "moreInfo");
 				String xmlContent = StreamUtils.inputStreamToString(meta.getContent(), true);
 
