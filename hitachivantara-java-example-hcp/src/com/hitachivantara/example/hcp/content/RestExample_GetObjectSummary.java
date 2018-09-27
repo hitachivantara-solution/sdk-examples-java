@@ -12,7 +12,7 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.HCPObjectSummary;
 
 /**
- * 统计桶信息示例
+ * 获取对象概要信息
  * 
  * @author sohan
  *
@@ -25,9 +25,8 @@ public class RestExample_GetObjectSummary {
 			try {
 				HCPStandardClient hcpClient = HCPClients.getInstance().getHCPClient();
 
-//				HCPObjectSummary summary = hcpClient.getObjectSummary("folder/subfolder/WeChat Image_20180716111626.doc");
-				HCPObjectSummary summary = hcpClient.getObjectSummary("folder/subfolder/");
-//				HCPObjectSummary summary = hcpClient.getObjectSummary("/");
+				HCPObjectSummary summary = hcpClient.getObjectSummary("folder/subfolder/WeChat Image_20180716111626.doc");
+//				HCPObjectSummary summary = hcpClient.getObjectSummary("folder/subfolder/");
 
 				System.out.println("Name = " + summary.getName());
 				if (summary.isDirectory()) {
