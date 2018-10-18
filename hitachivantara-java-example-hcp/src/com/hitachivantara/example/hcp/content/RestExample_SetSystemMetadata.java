@@ -3,13 +3,11 @@ package com.hitachivantara.example.hcp.content;
 import java.io.File;
 import java.io.IOException;
 
+import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.example.hcp.util.HCPClients;
-import com.hitachivantara.hcp.common.ex.HCPException;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
-import com.hitachivantara.hcp.standard.model.Retention;
 import com.hitachivantara.hcp.standard.model.metadata.HCPSystemMetadata;
-import com.hitachivantara.hcp.standard.model.request.impl.DeleteObjectRequest;
 
 /**
  * 设置系统元数据示例
@@ -37,7 +35,7 @@ public class RestExample_SetSystemMetadata {
 			} catch (InvalidResponseException e) {
 				e.printStackTrace();
 				return;
-			} catch (HCPException e) {
+			} catch (HSCException e) {
 				e.printStackTrace();
 				return;
 			}
@@ -57,7 +55,7 @@ public class RestExample_SetSystemMetadata {
 			} catch (InvalidResponseException e) {
 				e.printStackTrace();
 				return;
-			} catch (HCPException e) {
+			} catch (HSCException e) {
 				e.printStackTrace();
 				return;
 			}
@@ -93,7 +91,7 @@ public class RestExample_SetSystemMetadata {
 			} catch (InvalidResponseException e) {
 				e.printStackTrace();
 				return;
-			} catch (HCPException e) {
+			} catch (HSCException e) {
 				e.printStackTrace();
 				return;
 			}

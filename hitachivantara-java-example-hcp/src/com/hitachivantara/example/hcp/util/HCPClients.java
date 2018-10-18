@@ -1,32 +1,15 @@
 package com.hitachivantara.example.hcp.util;
 
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustStrategy;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContextBuilder;
-
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.core.http.ClientConfiguration;
 import com.hitachivantara.hcp.build.HCPClientBuilder;
 import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
 import com.hitachivantara.hcp.common.auth.BasicCredentials;
-import com.hitachivantara.hcp.common.ex.HCPException;
-import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 
 public class HCPClients {
@@ -67,11 +50,11 @@ public class HCPClients {
 		return hs3Client;
 	}
 
-	public HCPStandardClient getHCPClient() throws HCPException {
+	public HCPStandardClient getHCPClient() throws HSCException {
 		if (hcpClient == null) {
 			// Create s3 client
 			String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-			String namespace = "cloud";
+			String namespace = "anywhere";
 			// The access key (user1) encoded by Base64
 			String accessKey = "dXNlcjE="; 
 			// The AWS secret access key (hcp1234567) encrypted by MD5

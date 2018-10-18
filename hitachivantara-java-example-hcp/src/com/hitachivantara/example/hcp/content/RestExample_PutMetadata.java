@@ -12,9 +12,9 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
+import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
-import com.hitachivantara.hcp.common.ex.HCPException;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.metadata.HCPMetadata;
@@ -46,7 +46,7 @@ public class RestExample_PutMetadata {
 
 				// Inject file with 2 pattern of metadata into HCP system.
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				hcpClient.putObject(new PutObjectRequest(key, file).withS3Metadata(metadata).withMetadata("moreInfo", doc));
+				hcpClient.putObject(new PutObjectRequest(key, file).withMetadata(metadata).withMetadata("moreInfo", doc));
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Get metadata from HCP
@@ -71,7 +71,7 @@ public class RestExample_PutMetadata {
 			} catch (InvalidResponseException e) {
 				e.printStackTrace();
 				return;
-			} catch (HCPException e) {
+			} catch (HSCException e) {
 				e.printStackTrace();
 				return;
 			}

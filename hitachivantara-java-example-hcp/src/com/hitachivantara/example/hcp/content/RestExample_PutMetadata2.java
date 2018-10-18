@@ -7,20 +7,17 @@ import java.io.File;
 import java.io.IOException;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
+import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
-import com.hitachivantara.hcp.common.ex.HCPException;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.metadata.HCPMetadata;
 import com.hitachivantara.hcp.standard.model.metadata.S3CompatibleMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.PutMetadataRequest;
-import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
 /**
  * 存取S3标准metadata示例
@@ -74,7 +71,7 @@ public class RestExample_PutMetadata2 {
 			} catch (InvalidResponseException e) {
 				e.printStackTrace();
 				return;
-			} catch (HCPException e) {
+			} catch (HSCException e) {
 				e.printStackTrace();
 				return;
 			}

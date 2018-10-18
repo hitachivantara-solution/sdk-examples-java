@@ -6,15 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
+import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.core.http.ClientConfiguration;
 import com.hitachivantara.core.http.Protocol;
 import com.hitachivantara.hcp.build.HCPClientBuilder;
 import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
 import com.hitachivantara.hcp.common.auth.BasicCredentials;
-import com.hitachivantara.hcp.common.ex.HCPException;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.KeyAlgorithm;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
@@ -28,7 +26,7 @@ import com.hitachivantara.hcp.standard.model.HCPObject;
  */
 public class RestExample_PathOptimizing {
 
-	public static void main(String[] args) throws IOException, HCPException {
+	public static void main(String[] args) throws IOException, HSCException {
 		HCPStandardClient hcpClient = null;
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
@@ -47,7 +45,6 @@ public class RestExample_PathOptimizing {
 			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
 			hcpClient = builder.withClientConfiguration(clientConfig).withCredentials(new BasicCredentials(accessKey, secretKey)).withEndpoint(endpoint).withNamespace(namespace)
 					.bulid();
-
 		}
 
 		{
@@ -89,7 +86,7 @@ public class RestExample_PathOptimizing {
 				hcpObject = hcpClient.getObject(key);
 			} catch (InvalidResponseException e) {
 				e.printStackTrace();
-			} catch (HCPException e) {
+			} catch (HSCException e) {
 				e.printStackTrace();
 			}
 		}
