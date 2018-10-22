@@ -1,6 +1,5 @@
 package com.hitachivantara.example.hcp.content;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -21,6 +20,7 @@ import javax.net.ssl.X509TrustManager;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.hitachivantara.common.util.StreamUtils;
+import com.hitachivantara.example.hcp.util.Account;
 
 /**
  * 未使用sdk操作对象存储取得删除示例 
@@ -79,8 +79,8 @@ public class PureRestExample_PutGetDeleteObject {
 
 	public static void main(String[] args) throws MalformedURLException {
 		final String protocol = "https";// "http"
-		final String namespace = "cloud";
-		final String endpoint = "tn9.hcp8.hdim.lab";
+		String endpoint = Account.endpoint;
+		String namespace = Account.namespace;
 		final String rest = protocol + "://" + namespace + "." + endpoint + "/rest/"; // 要提交的目标地址
 		String key = "hcp-test1/Test1-1.log";
 		final URL url = new URL(rest + key);
@@ -102,7 +102,7 @@ public class PureRestExample_PutGetDeleteObject {
 			connection.setDoOutput(true); // 从连接中读取数据
 			connection.setUseCaches(false); // 禁止缓存
 			connection.setInstanceFollowRedirects(true); // 自动执行HTTP重定向
-			connection.setRequestProperty("Authorization", "HCP YWRtaW4=:161ebd7d45089b3446ee4e0d86dbcf92"); // 设置认证信息
+			connection.setRequestProperty("Authorization", Account.HCP_AUTHORIZATION); // 设置认证信息
 			OutputStream out = connection.getOutputStream(); // 获取输出流
 			byte[] data = ("TimeMillis=" + System.currentTimeMillis() + " Time=" + new Date().toString()).getBytes("utf-8");
 			out.write(data);// 将要传递的数据写入数据输出流
@@ -152,7 +152,7 @@ public class PureRestExample_PutGetDeleteObject {
 			connection.setDoOutput(true); // 从连接中读取数据
 			connection.setUseCaches(false); // 禁止缓存
 			connection.setInstanceFollowRedirects(true); // 自动执行HTTP重定向
-			connection.setRequestProperty("Authorization", "HCP YWRtaW4=:161ebd7d45089b3446ee4e0d86dbcf92"); // 设置认证信息
+			connection.setRequestProperty("Authorization", Account.HCP_AUTHORIZATION); // 设置认证信息
 
 			// 更多返回代码参见帮助
 			// Using a Namespace > HTTP reference > HTTP return codes
@@ -192,7 +192,7 @@ public class PureRestExample_PutGetDeleteObject {
 			connection.setDoOutput(true); // 从连接中读取数据
 			connection.setUseCaches(false); // 禁止缓存
 			connection.setInstanceFollowRedirects(true); // 自动执行HTTP重定向
-			connection.setRequestProperty("Authorization", "HCP YWRtaW4=:161ebd7d45089b3446ee4e0d86dbcf92"); // 设置认证信息
+			connection.setRequestProperty("Authorization", Account.HCP_AUTHORIZATION); // 设置认证信息
 
 			// 更多返回代码参见帮助
 			// Using a Namespace > HTTP reference > HTTP return codes

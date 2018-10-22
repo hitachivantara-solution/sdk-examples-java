@@ -8,11 +8,12 @@ import java.util.Arrays;
 
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.DigestUtils;
-import com.hitachivantara.core.http.ClientConfiguration;
 import com.hitachivantara.core.http.Protocol;
+import com.hitachivantara.core.http.client.ClientConfiguration;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.hcp.build.HCPClientBuilder;
 import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
-import com.hitachivantara.hcp.common.auth.BasicCredentials;
+import com.hitachivantara.hcp.common.auth.LocalCredentials;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.io.HCPInputStream;
@@ -30,13 +31,17 @@ public class RestExample_PutGetDeleteObject {
 		HCPStandardClient hcpClient = null;
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
+			//创建HCP访问客户端，客户端仅需要创建一次
 			// Create s3 client
-			String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-			String namespace = "cloud";
-			// The access key (user1) encoded by Base64
-			String accessKey = "dXNlcjE=";
-			// The secret access key (hcp1234567) encrypted by MD5
-			String secretKey = "c0658942779dfbd4b4d6e59735b0c846";
+			// 指定需要登录的HCP 租户 及 桶
+			String endpoint = Account.endpoint;
+			String namespace = Account.namespace;
+			// 登录需要的用户名
+			// The access key encoded by Base64
+			String accessKey = Account.accessKey;
+			// 登录需要的密码
+			// The AWS secret access key encrypted by MD5
+			String secretKey = Account.secretKey;
 
 			ClientConfiguration clientConfig = new ClientConfiguration();
 			// Using HTTP protocol
@@ -45,7 +50,7 @@ public class RestExample_PutGetDeleteObject {
 			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
 			hcpClient = builder
 					.withClientConfiguration(clientConfig)
-					.withCredentials(new BasicCredentials(accessKey, secretKey))
+					.withCredentials(new LocalCredentials(accessKey, secretKey))
 					.withEndpoint(endpoint)
 					.withNamespace(namespace)
 					.bulid();
@@ -60,11 +65,14 @@ public class RestExample_PutGetDeleteObject {
 		String key = "folder/subfolder/" + file.getName();
 
 		{
-			// Put这个文件至HCP
+			// 上传文件至HCP
 			// Inject file into HCP system.
 			try {
+				// 上传前无需刻意创建目录，只需指定存储路径,如需创建目录也可使用createDirectory方法
+				// hcpClient.createDirectory("folder/subfolder/123");
+
 				hcpClient.putObject(key, file);
-				
+
 				// Check whether object exist.
 				boolean exist = hcpClient.doesObjectExist(key);
 				assertTrue(exist == true);
@@ -78,7 +86,7 @@ public class RestExample_PutGetDeleteObject {
 			}
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+		//以下为验证上传数据与本地数据一致性测示例，SDK已集成此功能，实际开发时不需要以下代码！
 		// Verify result:
 		HCPInputStream in = hcpObject.getContent();
 		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);

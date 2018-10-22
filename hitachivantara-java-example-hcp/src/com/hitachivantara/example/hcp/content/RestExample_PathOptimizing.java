@@ -8,11 +8,12 @@ import java.util.Arrays;
 
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.DigestUtils;
-import com.hitachivantara.core.http.ClientConfiguration;
 import com.hitachivantara.core.http.Protocol;
+import com.hitachivantara.core.http.client.ClientConfiguration;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.hcp.build.HCPClientBuilder;
 import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
-import com.hitachivantara.hcp.common.auth.BasicCredentials;
+import com.hitachivantara.hcp.common.auth.LocalCredentials;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.KeyAlgorithm;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
@@ -21,6 +22,7 @@ import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
  * HCP存储路径最佳实践示例
+ * 
  * @author sohan
  *
  */
@@ -31,19 +33,24 @@ public class RestExample_PathOptimizing {
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
 			// Create s3 client
-			String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-			String namespace = "cloud";
-			// The access key (user1) encoded by Base64
-			String accessKey = "dXNlcjE=";
-			// The secret access key (hcp1234567) encrypted by MD5
-			String secretKey = "c0658942779dfbd4b4d6e59735b0c846";
+			// 指定需要登录的HCP 租户 及 桶
+			String endpoint = Account.endpoint;
+			String namespace = Account.namespace;
+			// 登录需要的用户名
+			// The access key encoded by Base64
+			String accessKey = Account.accessKey;
+			// 登录需要的密码
+			// The AWS secret access key encrypted by MD5
+			String secretKey = Account.secretKey;
 
 			ClientConfiguration clientConfig = new ClientConfiguration();
 			// Using HTTP protocol
 			clientConfig.setProtocol(Protocol.HTTP);
 
 			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
-			hcpClient = builder.withClientConfiguration(clientConfig).withCredentials(new BasicCredentials(accessKey, secretKey)).withEndpoint(endpoint).withNamespace(namespace)
+			hcpClient = builder.withClientConfiguration(clientConfig)
+					.withCredentials(new LocalCredentials(accessKey, secretKey))
+					.withEndpoint(endpoint).withNamespace(namespace)
 					.bulid();
 		}
 
@@ -68,7 +75,7 @@ public class RestExample_PathOptimizing {
 			if (exist) {
 				// Delete object in HCP.
 				boolean deleted = hcpClient.deleteObject(key);
-				System.out.println("Orginal object was deleted! " +deleted);
+				System.out.println("Orginal object was deleted! " + deleted);
 			}
 		}
 

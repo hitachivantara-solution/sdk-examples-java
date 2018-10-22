@@ -40,7 +40,7 @@ public class RestExample_ListDirectory {
 				List<HCPObjectEntry> objs;
 				while ((objs = it.next(100)) != null) {
 					for (HCPObjectEntry objSummary : objs) {
-						System.out.println(++i + "\t" + objSummary.getSize() + "\t" + objSummary.getETag() + "\t" + objSummary.getKey()+"\t"+objSummary.getType());
+						System.out.println(++i + "\t" + objSummary.getSize() + "\t" + objSummary.getContentHash() + "\t" + objSummary.getKey()+"\t"+objSummary.getType());
 					}
 				}
 				

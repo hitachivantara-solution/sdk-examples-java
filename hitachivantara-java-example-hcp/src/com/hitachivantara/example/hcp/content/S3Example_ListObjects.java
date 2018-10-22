@@ -24,6 +24,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.hitachivantara.common.util.DigestUtils;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
 /**
@@ -39,7 +40,7 @@ public class S3Example_ListObjects {
 		// Here is the file will be uploaded into HCP
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
 		// The location in HCP where this file will be stored.
-		String bucketName = "anywhere";
+		String bucketName = Account.namespace;
 
 		// 此处准备一些object用来list
 		// Prepare some objects for list.

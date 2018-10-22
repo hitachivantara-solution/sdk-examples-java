@@ -17,6 +17,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.hitachivantara.common.util.DigestUtils;
+import com.hitachivantara.example.hcp.util.Account;
 
 /**
  * S3 对象文件存、删、取示例
@@ -30,11 +31,14 @@ public class S3Example_PutGetDeleteObject {
 		{
 			// 创建S3客户端，只需要创建一次客户端，请将endpoint及用户名密码更改为您的HCP配置
 			// Create s3 client
-			String endpoint = "tenant1.hcp-demo.hcpdemo.com";//"tn9.hcp8.hdim.lab";
-			// The AWS access key (user1) encoded by Base64
-			String accessKey = "dXNlcjE=";
-			// The AWS secret access key (hcp1234567) encrypted by MD5
-			String secretKey = "c0658942779dfbd4b4d6e59735b0c846";
+			// 指定需要登录的HCP 租户 及 桶
+			String endpoint = Account.endpoint;
+			// 登录需要的用户名
+			// The access key encoded by Base64
+			String accessKey = Account.accessKey;
+			// 登录需要的密码
+			// The AWS secret access key encrypted by MD5
+			String secretKey = Account.secretKey;
 
 			com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
 			// Using HTTP protocol
@@ -53,7 +57,7 @@ public class S3Example_PutGetDeleteObject {
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
 		// The location in HCP where this file will be stored.
 		String key = "folder/subfolder/" + file.getName();
-		String bucketName = "test1";
+		String bucketName = Account.namespace;
 		
 		{
 			try {

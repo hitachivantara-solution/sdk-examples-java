@@ -50,7 +50,7 @@ public class RestExample_ListObjects {
 					// 发现的对象信息
 					@Override
 					public NextAction foundObject(HCPObjectEntry objectEntry) {
-						System.out.println(++i + "\t" + objectEntry.getSize() + "\t" + objectEntry.getETag() + "\t" + objectEntry.getKey() + "\t" + objectEntry.getType());
+						System.out.println(++i + "\t" + objectEntry.getSize() + "\t" + objectEntry.getContentHash() + "\t" + objectEntry.getKey() + "\t" + objectEntry.getType());
 						return null;
 					}
 				});
