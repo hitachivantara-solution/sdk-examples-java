@@ -61,7 +61,8 @@ public class S3Example_PutGetDeleteObject {
 		
 		{
 			try {
-				// Put这个文件至HCP
+				// 上传文件至HCP
+				// 上传前无需刻意创建目录，只需指定存储路径
 				// Inject file into HCP system.
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				hs3Client.putObject(bucketName, key, file);

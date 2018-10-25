@@ -18,6 +18,7 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.metadata.HCPMetadata;
 import com.hitachivantara.hcp.standard.model.metadata.S3CompatibleMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.PutMetadataRequest;
+import com.hitachivantara.hcp.standard.util.MetadataUtils;
 
 /**
  * 存取S3标准metadata示例
@@ -49,7 +50,7 @@ public class RestExample_PutMetadata2 {
 
 				// Attach Custom METADATA with specific key
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				hcpClient.putMetadata(new PutMetadataRequest(key, "metadata2", doc));
+				hcpClient.putMetadata(new PutMetadataRequest(key, "metadata2", MetadataUtils.toByteArray(doc)));
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				
 				// Get metadata from HCP

@@ -20,6 +20,7 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.metadata.HCPMetadata;
 import com.hitachivantara.hcp.standard.model.metadata.S3CompatibleMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
+import com.hitachivantara.hcp.standard.util.MetadataUtils;
 
 /**
  * 存取自定义元数据Metadata示例
@@ -46,7 +47,7 @@ public class RestExample_PutMetadata {
 
 				// Inject file with 2 pattern of metadata into HCP system.
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				hcpClient.putObject(new PutObjectRequest(key, file).withMetadata(metadata).withMetadata("moreInfo", doc));
+				hcpClient.putObject(new PutObjectRequest(key, file).withMetadata(metadata).withMetadata("moreInfo", MetadataUtils.toByteArray(doc)));
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Get metadata from HCP

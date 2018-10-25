@@ -22,6 +22,6 @@
 	<classpathentry kind="lib" path="lib/jaxen-1.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="lib/hitachivantara-java-sdk-hcp-0.1.279-J-SNAPSHOT.jar" sourcepath="/hitachivantara-java-sdk-hcp"/>
+	<classpathentry kind="lib" path="lib/hitachivantara-java-sdk-hcp-0.1.290.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

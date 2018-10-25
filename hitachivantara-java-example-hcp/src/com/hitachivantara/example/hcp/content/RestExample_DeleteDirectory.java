@@ -30,8 +30,6 @@ public class RestExample_DeleteDirectory {
 				hcpClient.deleteDirectory(new DeleteDirectoryRequest().withDirectory(directoryKey)
 						// Purge=true HCP将清除历史版本清理出更多空间
 						.withPurgeDelete(true)
-						//是否删除子目录及其对象文件
-						.withRecursiveDirectory(true)
 						// 删除事件监听器
 //						.withDeleteListener(new ObjectDeletingListener() {
 //							// 删除动作前触发
