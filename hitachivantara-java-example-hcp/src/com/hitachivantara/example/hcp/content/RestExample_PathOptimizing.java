@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 import com.hitachivantara.common.ex.HSCException;
@@ -17,7 +18,6 @@ import com.hitachivantara.hcp.common.auth.LocalCredentials;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.KeyAlgorithm;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
-import com.hitachivantara.hcp.standard.io.HCPInputStream;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
@@ -99,7 +99,7 @@ public class RestExample_PathOptimizing {
 		}
 
 		// Verify result:
-		HCPInputStream in = hcpObject.getContent();
+		InputStream in = hcpObject.getContent();
 		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
 		byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
 		in.close();

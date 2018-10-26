@@ -12,8 +12,11 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
+import com.amazonaws.event.ProgressEvent;
+import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.hitachivantara.common.util.DigestUtils;
@@ -66,6 +69,15 @@ public class S3Example_PutGetDeleteObject {
 				// Inject file into HCP system.
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				hs3Client.putObject(bucketName, key, file);
+				
+				System.out.println("L="+file.length());
+				hs3Client.putObject(new PutObjectRequest(bucketName, key, file).withGeneralProgressListener(new ProgressListener() {
+
+					@Override
+					public void progressChanged(ProgressEvent progressEvent) {
+						// TODO Auto-generated method stub
+						System.out.println(progressEvent.getEventType()+" / "+progressEvent.getBytes());
+					}}));
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Check whether object exist.

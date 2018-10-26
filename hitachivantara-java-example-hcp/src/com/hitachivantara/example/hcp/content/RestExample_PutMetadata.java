@@ -67,7 +67,7 @@ public class RestExample_PutMetadata {
 				format.setEncoding("UTF-8");
 				XMLWriter writer = new XMLWriter(out, format);
 				writer.write(doc);
-				assertTrue(xmlContent.equals(out.toString()));
+				assertTrue(xmlContent.equalsIgnoreCase(out.toString()));
 
 			} catch (InvalidResponseException e) {
 				e.printStackTrace();

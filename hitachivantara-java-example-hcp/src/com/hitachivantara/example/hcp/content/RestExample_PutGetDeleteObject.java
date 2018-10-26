@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 import com.hitachivantara.common.ex.HSCException;
@@ -16,7 +17,6 @@ import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
 import com.hitachivantara.hcp.common.auth.LocalCredentials;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
-import com.hitachivantara.hcp.standard.io.HCPInputStream;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
@@ -88,7 +88,7 @@ public class RestExample_PutGetDeleteObject {
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		//以下为验证上传数据与本地数据一致性测示例，SDK已集成此功能，实际开发时不需要以下代码！
 		// Verify result:
-		HCPInputStream in = hcpObject.getContent();
+		InputStream in = hcpObject.getContent();
 		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
 		byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
 		in.close();
