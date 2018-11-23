@@ -47,7 +47,7 @@ public class RestExample_GetNamespaceUsage {
 				System.out.println("SoftQuotaPercent = " + statistics.getSoftQuotaPercent());
 
 				// 测试环境打印结果示例：
-				// NamespaceName = cloud
+				// NamespaceName = Account.namespace;
 				// ObjectCount = 34872
 				// TotalCapacityBytes = 50.0 GB ( 53,687,091,200 bytes )
 				// UsedCapacityBytes = 13.2 GB ( 14,226,214,912 bytes )

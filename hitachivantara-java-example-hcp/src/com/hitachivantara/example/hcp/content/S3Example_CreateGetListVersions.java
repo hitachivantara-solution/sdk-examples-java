@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3VersionSummary;
 import com.amazonaws.services.s3.model.VersionListing;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
 /**
@@ -27,7 +28,7 @@ public class S3Example_CreateGetListVersions {
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
 		// The location in HCP where this file will be stored.
 		String key = "folder/subfolder/" + file.getName();
-		String bucketName = "cloud";
+		String bucketName = Account.namespace;
 
 		// 创建一些版本，请确认Versioning功能已经开启，否侧此处会出现异常。
 		// 关于如何开启版本请参考帮助： Managing a Tenant and Its Namespaces > Managing namespaces > Configuring a namespace > Configuring object versioning

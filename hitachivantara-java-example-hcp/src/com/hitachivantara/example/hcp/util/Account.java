@@ -1,12 +1,19 @@
 package com.hitachivantara.example.hcp.util;
 
 public class Account {
-	 public final static String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-	 public final static String namespace = "cloud";
-	 // The access key (user1) encoded by Base64
-	 public final static String accessKey = "dXNlcjE=";
+//	 public final static String endpoint = "tenant1.hcp-demo.hcpdemo.com";
+//	 public final static String namespace = "test1";
+//	 // The access key (user1) encoded by Base64
+//	 public final static String accessKey = "YWRtaW4=";
+//	 // The secret access key (hcp1234567) encrypted by MD5
+//	 public final static String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
+
+	 public final static String endpoint = "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; // "tn9.hcp8.hdim.lab"; //
+	 public final static String namespace = "test";
+	 // The access key (user1) encoded by Base64 YWRtaW4=:161ebd7d45089b3446ee4e0d86dbcf92 dXNlcjE=:c0658942779dfbd4b4d6e59735b0c846
+	 public final static String accessKey = "YWRtaW4=";
 	 // The secret access key (hcp1234567) encrypted by MD5
-	 public final static String secretKey = "c0658942779dfbd4b4d6e59735b0c846";
+	 public final static String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
 
 	// 中意人寿专用HCP测试账户有效期截至至2019-2月
 	// 139.159.3.234 generalichina.northcommmercial.hcp1.hdslab.net

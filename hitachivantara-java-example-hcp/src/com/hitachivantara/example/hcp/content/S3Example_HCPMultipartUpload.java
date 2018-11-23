@@ -13,6 +13,7 @@ import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.example.hcp.content.multipartupload.MulitipartUploadException;
 import com.hitachivantara.example.hcp.content.multipartupload.MulitipartUploaderExecutor;
 import com.hitachivantara.example.hcp.content.multipartupload.UploadEventHandler;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
 /**
@@ -31,9 +32,9 @@ public class S3Example_HCPMultipartUpload {
 		// 测试用大文件（**分片上传文件应为大文件至少500MB以上，小文件不建议使用分片方式上传**）
 		final File tobeUploadFile = new File("C:\\VDisk\\DriverD\\Downloads\\Libs\\cosbench-master.zip");
 		// 上传key
-		final String objectPath = "hcp-test/" + tobeUploadFile.getName() + "2";
+		final String objectPath = "hcp-test/" + tobeUploadFile.getName() + "3";
 		// 桶名称
-		final String bucketName = "cloud";
+		final String bucketName = Account.namespace;
 
 		// ==========================================================================================================================
 		MulitipartUploaderExecutor exec = new MulitipartUploaderExecutor(s3Client, bucketName, objectPath, tobeUploadFile, PART_SIZE);

@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.DigestUtils;
+import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.core.http.Protocol;
 import com.hitachivantara.core.http.client.ClientConfiguration;
 import com.hitachivantara.example.hcp.util.Account;
@@ -89,6 +90,7 @@ public class RestExample_PutGetDeleteObject {
 		//以下为验证上传数据与本地数据一致性测示例，SDK已集成此功能，实际开发时不需要以下代码！
 		// Verify result:
 		InputStream in = hcpObject.getContent();
+//		StreamUtils.inputStreamToFile(in, filePath, true)
 		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
 		byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
 		in.close();

@@ -11,6 +11,7 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 
 /**
@@ -27,7 +28,7 @@ public class S3Example_PutMetadata {
 		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
 		// The location in HCP where this file will be stored.
 		String key = "folder/subfolder/" + file.getName();
-		String bucketName = "cloud";
+		String bucketName = Account.namespace;
 
 		{
 			try {
