@@ -7,9 +7,9 @@ import com.hitachivantara.core.http.client.HttpClientBuilder;
 import com.hitachivantara.core.http.client.impl.DefaultHttpClientBuilder;
 import com.hitachivantara.core.http.content.HttpEntity;
 import com.hitachivantara.core.http.content.StringEntity;
-import com.hitachivantara.core.http.model.Forms;
-import com.hitachivantara.core.http.model.Headers;
-import com.hitachivantara.core.http.model.Parameters;
+import com.hitachivantara.core.http.model.HttpForm;
+import com.hitachivantara.core.http.model.HttpHeader;
+import com.hitachivantara.core.http.model.HttpParameter;
 import com.hitachivantara.core.http.util.HttpUtils;
 import com.hitachivantara.core.http.util.SimpleHttpClient;
 
@@ -25,9 +25,9 @@ public class HCIAuth {
 		HttpClientBuilder builder = new DefaultHttpClientBuilder(configuration);
 		SimpleHttpClient client = new SimpleHttpClient(builder);
 
-		Forms form = new Forms();
-		Headers header = null;
-		Parameters param = null;
+		HttpForm form = new HttpForm();
+		HttpHeader header = null;
+		HttpParameter param = null;
 		HttpEntity entity = new StringEntity("body");
 		
 		form.put("grant_type", "password");

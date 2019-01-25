@@ -69,6 +69,7 @@ public class HCPClients {
 			String secretKey = Account.secretKey;
 
 			ClientConfiguration clientConfig = new ClientConfiguration();
+			clientConfig.setConnectTimeout(2000);
 			// Using HTTP protocol
 			clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTPS);
 

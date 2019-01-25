@@ -9,6 +9,7 @@ import com.hitachivantara.hcp.standard.api.event.ListObjectHandler;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.define.NextAction;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
+import com.hitachivantara.hcp.standard.model.HCPObjectSummary;
 import com.hitachivantara.hcp.standard.model.request.impl.ListObjectRequest;
 
 /**
@@ -49,8 +50,8 @@ public class RestExample_ListObjects {
 
 					// 发现的对象信息
 					@Override
-					public NextAction foundObject(HCPObjectEntry objectEntry) {
-						System.out.println(++i + "\t" + objectEntry.getSize() + "\t" + objectEntry.getContentHash() + "\t" + objectEntry.getKey() + "\t" + objectEntry.getType());
+					public NextAction foundObject(HCPObjectSummary objectSummary) throws HSCException {
+						System.out.println(++i + "\t" + objectSummary.getSize() + "\t" + objectSummary.getContentHash() + "\t" + objectSummary.getKey() + "\t" + objectSummary.getType());
 						return null;
 					}
 				});

@@ -17,8 +17,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
+import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.Account;
 
@@ -115,7 +114,7 @@ public class PureRestExample_PutGetDeleteObject {
 				{
 					// 通过数据签名验证验证本地数据与上传成功的数据一致
 					String etag = connection.getHeaderField("ETag");
-					String localEtag = "\"" + DigestUtils.md5Hex(data) + "\""; // 此处为MD5计算，无需第三方lib
+					String localEtag = "\"" + DigestUtils.calcMD5ToHex(data) + "\""; // 此处为MD5计算，无需第三方lib
 					if (etag.equals(localEtag)) {
 						System.out.println("Verify contents=" + (etag.equals(localEtag)));
 					} else {
