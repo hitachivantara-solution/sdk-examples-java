@@ -16,6 +16,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -38,7 +39,7 @@ public class S3Example_ListObjects {
 		AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();
 
 		// Here is the file will be uploaded into HCP
-		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
+		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
 		String bucketName = Account.namespace;
 
@@ -61,6 +62,7 @@ public class S3Example_ListObjects {
 			try {
 				// Here is the folder path you want to list.
 				String directoryKey = "sdk-test/moreThan100objs/";
+//				String directoryKey = "";
 
 				// 罗列指定目录中的所有对象
 				// Request HCP to list all the objects in this folder.

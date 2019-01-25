@@ -14,6 +14,7 @@ import org.dom4j.io.XMLWriter;
 
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.StreamUtils;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
@@ -31,9 +32,9 @@ public class RestExample_PutMetadata {
 
 	public static void main(String[] args) throws IOException {
 		// Here is the file will be uploaded into HCP
-		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
+		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = "folder/subfolder/" + file.getName();
+		String key = "rison/subfolder/" + file.getName();
 
 		{
 			try {

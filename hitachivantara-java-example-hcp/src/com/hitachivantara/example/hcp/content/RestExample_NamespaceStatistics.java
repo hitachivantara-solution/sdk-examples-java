@@ -15,7 +15,7 @@ import com.hitachivantara.hcp.standard.model.NamespaceStatistics;
  * @author sohan
  *
  */
-public class RestExample_GetNamespaceUsage {
+public class RestExample_NamespaceStatistics {
 
 	public static void main(String[] args) throws IOException {
 

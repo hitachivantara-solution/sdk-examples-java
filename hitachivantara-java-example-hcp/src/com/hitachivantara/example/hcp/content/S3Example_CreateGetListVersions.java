@@ -25,7 +25,7 @@ public class S3Example_CreateGetListVersions {
 		AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();
 
 		// Here is the file will be uploaded into HCP
-		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
+		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
 		String key = "folder/subfolder/" + file.getName();
 		String bucketName = Account.namespace;

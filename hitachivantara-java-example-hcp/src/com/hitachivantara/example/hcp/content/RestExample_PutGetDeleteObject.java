@@ -21,8 +21,8 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
- * 对象存储取得删除示例
- * 包括创建client端
+ * 对象存储取得删除示例 包括创建client端
+ * 
  * @author sohan
  *
  */
@@ -32,7 +32,7 @@ public class RestExample_PutGetDeleteObject {
 		HCPStandardClient hcpClient = null;
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
-			//创建HCP访问客户端，客户端仅需要创建一次
+			// 创建HCP访问客户端，客户端仅需要创建一次
 			// Create s3 client
 			// 指定需要登录的HCP 租户 及 桶
 			String endpoint = Account.endpoint;
@@ -49,11 +49,7 @@ public class RestExample_PutGetDeleteObject {
 			clientConfig.setProtocol(Protocol.HTTP);
 
 			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
-			hcpClient = builder
-					.withClientConfiguration(clientConfig)
-					.withCredentials(new LocalCredentials(accessKey, secretKey))
-					.withEndpoint(endpoint)
-					.withNamespace(namespace)
+			hcpClient = builder.withClientConfiguration(clientConfig).withCredentials(new LocalCredentials(accessKey, secretKey)).withEndpoint(endpoint).withNamespace(namespace)
 					.bulid();
 		}
 
@@ -61,9 +57,9 @@ public class RestExample_PutGetDeleteObject {
 
 		HCPObject hcpObject = null;
 		// Here is the file will be uploaded into HCP
-		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
+		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = "folder/subfolder/" + file.getName();
+		String key = "rison/subfolder/" + file.getName();
 
 		{
 			// 上传文件至HCP
@@ -87,27 +83,30 @@ public class RestExample_PutGetDeleteObject {
 			}
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//以下为验证上传数据与本地数据一致性测示例，SDK已集成此功能，实际开发时不需要以下代码！
-		// Verify result:
+		// 获得数据流
 		InputStream in = hcpObject.getContent();
-//		StreamUtils.inputStreamToFile(in, filePath, true)
-		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
-		byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
-		in.close();
+		// 可以将文件保存至本地目录
+		// StreamUtils.inputStreamToFile(in, "C:\\myfile.doc", true)
 
-		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
-		assertTrue(equals == true);
+		// 以下为验证上传数据与本地数据一致性测示例，SDK已集成此功能，实际开发时不需要以下代码！
+		{
+			byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
+			byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
+			in.close();
 
+			boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
+			assertTrue(equals == true);
+		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-//		{
-//			// Delete object in HCP.
-//			hcpClient.deleteObject(key);
-//
-//			// Check whether object exist.
-//			boolean exist = hcpClient.doesObjectExist(key);
-//			assertTrue(exist == false);
-//		}
+		// {
+		// // 通过delete方法可以删除对象
+		// hcpClient.deleteObject(key);
+		//
+		// // Check whether object exist.
+		// boolean exist = hcpClient.doesObjectExist(key);
+		// assertTrue(exist == false);
+		// }
 
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

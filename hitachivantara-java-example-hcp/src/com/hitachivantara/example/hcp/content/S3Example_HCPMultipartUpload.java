@@ -30,9 +30,9 @@ public class S3Example_HCPMultipartUpload {
 		final int PART_SIZE = 10 * 1024 * 1024; // Set part size to 10 MB.
 
 		// 测试用大文件（**分片上传文件应为大文件至少500MB以上，小文件不建议使用分片方式上传**）
-		final File tobeUploadFile = new File("C:\\VDisk\\DriverD\\Downloads\\Libs\\cosbench-master.zip");
+		final File tobeUploadFile = new File("C:\\VDisk\\DriverD\\Downloads\\Libs\\tika-app-1.7.jar");
 		// 上传key
-		final String objectPath = "hcp-test/" + tobeUploadFile.getName() + "3";
+		final String objectPath = "hcp-test/" + tobeUploadFile.getName() + "6";
 		// 桶名称
 		final String bucketName = Account.namespace;
 

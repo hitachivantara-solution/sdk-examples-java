@@ -1,7 +1,6 @@
 package com.hitachivantara.example.hcp.content.multipartupload;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,8 @@ import com.amazonaws.services.s3.model.CompleteMultipartUploadRequest;
 import com.amazonaws.services.s3.model.CompleteMultipartUploadResult;
 import com.amazonaws.services.s3.model.InitiateMultipartUploadRequest;
 import com.amazonaws.services.s3.model.InitiateMultipartUploadResult;
+import com.amazonaws.services.s3.model.ListMultipartUploadsRequest;
+import com.amazonaws.services.s3.model.MultipartUploadListing;
 import com.amazonaws.services.s3.model.PartETag;
 import com.amazonaws.services.s3.model.UploadPartRequest;
 
@@ -109,6 +110,12 @@ public class S3MultipartUploader {
 		}
 
 		return result;
+	}
+
+	public void list() {
+		ListMultipartUploadsRequest request = new ListMultipartUploadsRequest(bucketName);
+		MultipartUploadListing listing = hs3Client.listMultipartUploads(request);
+
 	}
 
 	public CompleteMultipartUploadResult complete() throws MulitipartUploadException {

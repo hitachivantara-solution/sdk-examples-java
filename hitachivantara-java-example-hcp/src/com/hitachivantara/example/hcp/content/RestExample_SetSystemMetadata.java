@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.hitachivantara.common.ex.HSCException;
+import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.body.HCPStandardClient;
@@ -21,7 +22,7 @@ public class RestExample_SetSystemMetadata {
 		HCPStandardClient hcpClient;
 
 		// Here is the file will be uploaded into HCP
-		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
+		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
 		String key = "folder/subfolder/" + file.getName();
 
@@ -47,6 +48,7 @@ public class RestExample_SetSystemMetadata {
 
 				HCPSystemMetadata metadata = new HCPSystemMetadata();
 				metadata.setShred(true);
+				//为对象添加锁，加锁后对象将无法被删除更新
 				metadata.setHold(true);
 				//设置保留期限 
 //				 metadata.setRetention(new Retention("A+1000d+20m"));

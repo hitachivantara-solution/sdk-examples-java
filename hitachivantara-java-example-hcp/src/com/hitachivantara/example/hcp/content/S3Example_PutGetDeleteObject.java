@@ -20,6 +20,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.hitachivantara.common.util.DigestUtils;
+import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.Account;
 
 /**
@@ -57,9 +58,9 @@ public class S3Example_PutGetDeleteObject {
 		
 		S3Object s3Object = null;
 		// Here is the file will be uploaded into HCP
-		File file = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
+		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = "folder/subfolder/" + file.getName();
+		String key = "folder11/subfolder111/" + file.getName();
 		String bucketName = Account.namespace;
 		
 		{
@@ -70,14 +71,20 @@ public class S3Example_PutGetDeleteObject {
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				hs3Client.putObject(bucketName, key, file);
 				
+//				PutObjectRequest re = new PutObjectRequest(bucketName, "image/p1.jpg", new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\P1.jpg"));
+//				re.putCustomRequestHeader("Content-Type", "image/png");
+//				hs3Client.putObject(re);
+//				hs3Client.putObject(new PutObjectRequest(bucketName, key, file).with)
+				
 				System.out.println("L="+file.length());
-				hs3Client.putObject(new PutObjectRequest(bucketName, key, file).withGeneralProgressListener(new ProgressListener() {
-
-					@Override
-					public void progressChanged(ProgressEvent progressEvent) {
-						// TODO Auto-generated method stub
-						System.out.println(progressEvent.getEventType()+" / "+progressEvent.getBytes());
-					}}));
+//				hs3Client.putObject(new PutObjectRequest(bucketName, key, file));
+//				.withGeneralProgressListener(new ProgressListener() {
+//
+//					@Override
+//					public void progressChanged(ProgressEvent progressEvent) {
+//						// TODO Auto-generated method stub
+//						System.out.println(progressEvent.getEventType()+" / "+progressEvent.getBytes());
+//					}}));
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Check whether object exist.
@@ -101,23 +108,25 @@ public class S3Example_PutGetDeleteObject {
 
 		// Verify result:
 		S3ObjectInputStream in = s3Object.getObjectContent();
+//		StreamUtils.inputStreamToFile(in, filePath, true);
+//		StreamUtils.inputStreamToConsole(in, true);
 		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
 		byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
 		in.close();
-
+//
 		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
 		assertTrue(equals == true);
 		
-		{
-			// Delete object in HCP.
-			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-			hs3Client.deleteObject(bucketName, key);
-			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-			
-			// Check whether object exist.
-			boolean exist = hs3Client.doesObjectExist(bucketName, key);
-			assertTrue(exist == false);
-		}
+//		{
+//			// Delete object in HCP.
+//			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+//			hs3Client.deleteObject(bucketName, key);
+//			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+//			
+//			// Check whether object exist.
+//			boolean exist = hs3Client.doesObjectExist(bucketName, key);
+//			assertTrue(exist == false);
+//		}
 		
 		System.out.println("Well done!");
 	}
