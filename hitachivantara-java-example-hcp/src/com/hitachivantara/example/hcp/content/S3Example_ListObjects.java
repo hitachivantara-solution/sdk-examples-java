@@ -30,6 +30,7 @@ import com.hitachivantara.example.hcp.util.HCPClients;
 
 /**
  * S3 列出目录包括子目录示例
+ * 
  * @author sohan
  *
  */
@@ -45,45 +46,55 @@ public class S3Example_ListObjects {
 
 		// 此处准备一些object用来list
 		// Prepare some objects for list.
-		{
-			for (int i = 0; i < 5; i++) {
-				String key = "folder/L1TestObject" + i + ".doc";
-				hs3Client.putObject(bucketName, key, file);
-			}
-
-			for (int i = 0; i < 10; i++) {
-				String key = "folder/subfolder/L2TestObject" + i + ".doc";
-				hs3Client.putObject(bucketName, key, file);
-			}
-		}
+//		{
+//			for (int i = 0; i < 5; i++) {
+//				String key = "Folder/moreThan100objs" + i + ".doc";
+//				hs3Client.putObject(bucketName, key, file);
+//			}
+//
+//			for (int i = 0; i < 10; i++) {
+//				String key = "Folder/moreThan100objs/L2TestObject" + i + ".doc";
+//				hs3Client.putObject(bucketName, key, file);
+//			}
+//		}
 
 		{
 			long i = 0;
 			try {
 				// Here is the folder path you want to list.
-				String directoryKey = "sdk-test/moreThan100objs/";
-//				String directoryKey = "";
+				String directoryKey = "Folder/moreThan100objs/";
 
-				// 罗列指定目录中的所有对象
 				// Request HCP to list all the objects in this folder.
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				ObjectListing objlisting = hs3Client.listObjects(new ListObjectsRequest().withBucketName(bucketName).withPrefix(directoryKey).withMaxKeys(9000));
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+				// 罗列此目录以及子目录的所有对象，包括目录本身
+//				ObjectListing objlisting = hs3Client.listObjects(new ListObjectsRequest().withBucketName(bucketName).withPrefix(directoryKey));
+				// 仅罗列此目录所有对象，包括目录本身
+				ObjectListing objlisting = hs3Client.listObjects(new ListObjectsRequest().withBucketName(bucketName).withPrefix(directoryKey).withDelimiter("/"));
+				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Printout objects
 				List<S3ObjectSummary> objs = objlisting.getObjectSummaries();
 				for (S3ObjectSummary s3ObjectSummary : objs) {
 					System.out.println(++i + "\t" + s3ObjectSummary.getSize() + "\t" + s3ObjectSummary.getETag() + "\t" + s3ObjectSummary.getKey());
 				}
-				
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				ObjectListing nextObjlisting = hs3Client.listNextBatchOfObjects(objlisting);
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				// Printout objects
-				List<S3ObjectSummary> nextobjs = nextObjlisting.getObjectSummaries();
-				for (S3ObjectSummary s3ObjectSummary : nextobjs) {
-					System.out.println(++i + "\t" + s3ObjectSummary.getSize() + "\t" + s3ObjectSummary.getETag() + "\t" + s3ObjectSummary.getKey());
+
+				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+				// 翻页打印-每页1000
+				ObjectListing nextObjlisting = objlisting;
+				while (true) {
+					nextObjlisting = hs3Client.listNextBatchOfObjects(nextObjlisting);
+
+					// Printout objects
+					List<S3ObjectSummary> nextobjs = nextObjlisting.getObjectSummaries();
+					for (S3ObjectSummary s3ObjectSummary : nextobjs) {
+						System.out.println(++i + "\t" + s3ObjectSummary.getSize() + "\t" + s3ObjectSummary.getETag() + "\t" + s3ObjectSummary.getKey());
+					}
+
+					if (!nextObjlisting.isTruncated()) {
+						break;
+					}
 				}
+				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 			} catch (AmazonServiceException e) {
 				e.printStackTrace();

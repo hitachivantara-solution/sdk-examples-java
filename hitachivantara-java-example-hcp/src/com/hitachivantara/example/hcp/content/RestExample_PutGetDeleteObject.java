@@ -9,15 +9,14 @@ import java.util.Arrays;
 
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.DigestUtils;
-import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.core.http.Protocol;
 import com.hitachivantara.core.http.client.ClientConfiguration;
 import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.hcp.build.HCPClientBuilder;
-import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
+import com.hitachivantara.hcp.build.HCPNamespaceClientBuilder;
 import com.hitachivantara.hcp.common.auth.LocalCredentials;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
@@ -29,7 +28,7 @@ import com.hitachivantara.hcp.standard.model.HCPObject;
 public class RestExample_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException, HSCException {
-		HCPStandardClient hcpClient = null;
+		HCPNamespace hcpClient = null;
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
 			// 创建HCP访问客户端，客户端仅需要创建一次
@@ -48,8 +47,11 @@ public class RestExample_PutGetDeleteObject {
 			// Using HTTP protocol
 			clientConfig.setProtocol(Protocol.HTTP);
 
-			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
-			hcpClient = builder.withClientConfiguration(clientConfig).withCredentials(new LocalCredentials(accessKey, secretKey)).withEndpoint(endpoint).withNamespace(namespace)
+			HCPNamespaceClientBuilder builder = HCPClientBuilder.defaultHCPClient();
+			hcpClient = builder.withClientConfiguration(clientConfig)
+					.withCredentials(new LocalCredentials(accessKey, secretKey))
+					.withEndpoint(endpoint)
+					.withNamespace(namespace)
 					.bulid();
 		}
 

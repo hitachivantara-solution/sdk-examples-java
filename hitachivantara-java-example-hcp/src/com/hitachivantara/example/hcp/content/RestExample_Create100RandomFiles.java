@@ -7,7 +7,7 @@ import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.example.hcp.util.RandomInputStream;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.PutObjectResult;
 import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
@@ -22,7 +22,7 @@ public class RestExample_Create100RandomFiles {
 	public static void main(String[] args) throws IOException {
 		{
 			try {
-				HCPStandardClient hcpClient = HCPClients.getInstance().getHCPClient();
+				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				// Here is the folder path you want to list.
 				// 需要列出的目录名

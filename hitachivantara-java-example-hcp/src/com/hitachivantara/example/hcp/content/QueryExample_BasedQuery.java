@@ -8,14 +8,14 @@ import com.hitachivantara.common.tools.PrettyRecordPrinter;
 import com.hitachivantara.common.util.DatetimeFormat;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
-import com.hitachivantara.hcp.query.body.HCPQueryClient;
+import com.hitachivantara.hcp.query.api.HCPQuery;
 import com.hitachivantara.hcp.query.define.ObjectProperty;
 import com.hitachivantara.hcp.query.define.Order;
 import com.hitachivantara.hcp.query.model.ObjectQueryResult;
 import com.hitachivantara.hcp.query.model.ObjectSummary;
 import com.hitachivantara.hcp.query.model.QueryResult;
 import com.hitachivantara.hcp.query.model.request.ObjectBasedQueryRequest;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 
 /**
  * 基于 HCP MEQ的元数据基本搜索功能演示
@@ -26,8 +26,8 @@ import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 public class QueryExample_BasedQuery {
 	int i = 0;
 
-	private HCPStandardClient hcpClient;
-	private HCPQueryClient hcpQuery;
+	private HCPNamespace hcpClient;
+	private HCPQuery hcpQuery;
 	private final PrettyRecordPrinter printer = new PrettyRecordPrinter();
 
 	public static void main(String[] args) throws IOException {

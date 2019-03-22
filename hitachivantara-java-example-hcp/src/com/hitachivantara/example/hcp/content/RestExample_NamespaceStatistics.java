@@ -6,7 +6,7 @@ import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.FormatUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.NamespaceStatistics;
 
 /**
@@ -22,7 +22,7 @@ public class RestExample_NamespaceStatistics {
 		{
 			try {
 				// 获得HCP客户端实例
-				HCPStandardClient hcpClient = HCPClients.getInstance().getHCPClient();
+				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				// 获得当前登录namespace的统计信息
 				NamespaceStatistics statistics = hcpClient.getNamespacesStatistics();

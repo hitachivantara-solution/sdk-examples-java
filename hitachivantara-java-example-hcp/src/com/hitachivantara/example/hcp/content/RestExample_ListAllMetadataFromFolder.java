@@ -3,10 +3,12 @@ package com.hitachivantara.example.hcp.content;
 import java.io.IOException;
 
 import com.hitachivantara.common.ex.HSCException;
+import com.hitachivantara.common.ex.ParseException;
 import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.HCPNamespace;
+import com.hitachivantara.hcp.standard.api.MetadataParser;
 import com.hitachivantara.hcp.standard.api.event.ListObjectHandler;
 import com.hitachivantara.hcp.standard.define.NextAction;
 import com.hitachivantara.hcp.standard.model.HCPObjectSummary;
@@ -20,7 +22,7 @@ import com.hitachivantara.hcp.standard.model.request.impl.ListObjectRequest;
  * @author sohan
  *
  */
-public class RestExample_ListObjects {
+public class RestExample_ListAllMetadataFromFolder {
 
 	public static void main(String[] args) throws IOException {
 		{
@@ -48,13 +50,43 @@ public class RestExample_ListObjects {
 //						})
 						;
 				hcpClient.listObjects(request, new ListObjectHandler() {
-					 int i = 0;
 
 					// 发现的对象信息
 					@Override
 					public NextAction foundObject(HCPObjectSummary objectSummary) throws HSCException {
-						 System.out.println(++i + "\t" + objectSummary.getSize() + "\t" + objectSummary.getContentHash() + "\t" + objectSummary.getKey() + "\t" +
-						 objectSummary.getType());
+						//取得所有meta并打印
+						Annotation[] metas = objectSummary.getMetadata();
+						if (metas != null) {
+							System.out.println("\n-------------------------------------------------------------------------------");
+							System.out.println("Key=" + objectSummary.getKey());
+							for (Annotation meta : metas) {
+								
+								hcpClient.getMetadata(objectSummary.getKey(), meta.getName(), new MetadataParser<String>() {
+
+									@Override
+									public String parse(HCPMetadata metadata) throws ParseException {
+										try {
+											System.out.println("\nContent of Metadata [" + meta.getName() + "]:");
+											StreamUtils.inputStreamToConsole(metadata.getContent(), true);
+											System.out.println();
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
+										return null;
+									}
+								});
+								
+//								or
+//								HCPMetadata hcpmeta = hcpClient.getMetadata(objectSummary.getKey(), meta.getName());
+//								try {
+//									System.out.println("\nContent of Metadata [" + meta.getName()+"]:");
+//									StreamUtils.inputStreamToConsole(hcpmeta.getContent(), true);
+//									System.out.println();
+//								} catch (IOException e) {
+//									e.printStackTrace();
+//								}
+							}
+						}
 
 						return null;
 					}

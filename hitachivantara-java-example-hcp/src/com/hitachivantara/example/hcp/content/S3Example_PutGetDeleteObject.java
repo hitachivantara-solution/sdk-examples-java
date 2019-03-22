@@ -63,6 +63,7 @@ public class S3Example_PutGetDeleteObject {
 		String key = "folder11/subfolder111/" + file.getName();
 		String bucketName = Account.namespace;
 		
+		key="baodan/shouxian/2019/03/11/65434532.pdf";
 		{
 			try {
 				// 上传文件至HCP

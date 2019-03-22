@@ -8,7 +8,7 @@ import com.hitachivantara.common.util.DateUtils;
 import com.hitachivantara.common.util.FormatUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.HCPObjectSummary;
 
 /**
@@ -24,7 +24,7 @@ public class RestExample_GetObjectSummary {
 		{
 			try {
 				// 获得HCP客户端实例
-				HCPStandardClient hcpClient = HCPClients.getInstance().getHCPClient();
+				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				// 获取当前对象的摘要信息
 				 HCPObjectSummary summary = hcpClient.getObjectSummary("folder/subfolder/WeChat Image_20180716111626.doc");

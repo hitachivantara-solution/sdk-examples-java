@@ -7,7 +7,7 @@ import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.metadata.HCPSystemMetadata;
 
 /**
@@ -19,7 +19,7 @@ import com.hitachivantara.hcp.standard.model.metadata.HCPSystemMetadata;
 public class RestExample_SetSystemMetadata {
 
 	public static void main(String[] args) throws IOException {
-		HCPStandardClient hcpClient;
+		HCPNamespace hcpClient;
 
 		// Here is the file will be uploaded into HCP
 		File file = Account.localFile1;

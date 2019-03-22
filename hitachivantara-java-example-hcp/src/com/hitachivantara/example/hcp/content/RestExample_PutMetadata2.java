@@ -15,7 +15,7 @@ import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.metadata.HCPMetadata;
 import com.hitachivantara.hcp.standard.model.metadata.S3CompatibleMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.PutMetadataRequest;
@@ -36,7 +36,7 @@ public class RestExample_PutMetadata2 {
 
 		{
 			try {
-				HCPStandardClient hcpClient = HCPClients.getInstance().getHCPClient();
+				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				S3CompatibleMetadata metadata = new S3CompatibleMetadata();
 				metadata.put("name", "Rison");

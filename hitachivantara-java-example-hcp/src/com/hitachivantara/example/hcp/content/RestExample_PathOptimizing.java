@@ -13,11 +13,11 @@ import com.hitachivantara.core.http.Protocol;
 import com.hitachivantara.core.http.client.ClientConfiguration;
 import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.hcp.build.HCPClientBuilder;
-import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
+import com.hitachivantara.hcp.build.HCPNamespaceClientBuilder;
 import com.hitachivantara.hcp.common.auth.LocalCredentials;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.api.KeyAlgorithm;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
@@ -29,7 +29,7 @@ import com.hitachivantara.hcp.standard.model.HCPObject;
 public class RestExample_PathOptimizing {
 
 	public static void main(String[] args) throws IOException, HSCException {
-		HCPStandardClient hcpClient = null;
+		HCPNamespace hcpClient = null;
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		{
 			// Create s3 client
@@ -47,7 +47,7 @@ public class RestExample_PathOptimizing {
 			// Using HTTP protocol
 			clientConfig.setProtocol(Protocol.HTTP);
 
-			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
+			HCPNamespaceClientBuilder builder = HCPClientBuilder.defaultHCPClient();
 			hcpClient = builder.withClientConfiguration(clientConfig)
 					.withCredentials(new LocalCredentials(accessKey, secretKey))
 					.withEndpoint(endpoint).withNamespace(namespace)

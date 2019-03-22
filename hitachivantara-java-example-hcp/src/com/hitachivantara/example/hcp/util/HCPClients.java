@@ -8,19 +8,25 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.core.http.client.ClientConfiguration;
 import com.hitachivantara.hcp.build.HCPClientBuilder;
+import com.hitachivantara.hcp.build.HCPNamespaceClientBuilder;
 import com.hitachivantara.hcp.build.HCPQueryClientBuilder;
-import com.hitachivantara.hcp.build.HCPStandardClientBuilder;
 import com.hitachivantara.hcp.common.auth.LocalCredentials;
-import com.hitachivantara.hcp.query.body.HCPQueryClient;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
+import com.hitachivantara.hcp.management.api.HCPSystemManagement;
+import com.hitachivantara.hcp.management.api.HCPTenantManagement;
+import com.hitachivantara.hcp.query.api.HCPQuery;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 
 public class HCPClients {
 
 	private static HCPClients instance = new HCPClients();
 
 	private AmazonS3 hs3Client = null;
-	private HCPStandardClient hcpClient = null;
-	private HCPQueryClient hcpQueryClient = null;
+	private HCPNamespace hcpClient = null;
+	private HCPQuery hcpQueryClient = null;
+
+	private HCPTenantManagement tenantMgrClient;
+
+	private HCPSystemManagement systemMgrClient;
 
 	private HCPClients() {
 	}
@@ -56,7 +62,7 @@ public class HCPClients {
 		return hs3Client;
 	}
 
-	public HCPStandardClient getHCPClient() throws HSCException {
+	public HCPNamespace getHCPClient() throws HSCException {
 		if (hcpClient == null) {
 			// 指定需要登录的HCP 租户 及 桶
 			String endpoint = Account.endpoint;
@@ -73,7 +79,7 @@ public class HCPClients {
 			// Using HTTP protocol
 			clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTPS);
 
-			HCPStandardClientBuilder builder = HCPClientBuilder.defaultHCPClient();
+			HCPNamespaceClientBuilder builder = HCPClientBuilder.defaultHCPClient();
 			hcpClient = builder.withClientConfiguration(clientConfig)
 					.withCredentials(new LocalCredentials(accessKey, secretKey))
 					.withEndpoint(endpoint)
@@ -84,11 +90,58 @@ public class HCPClients {
 		return hcpClient;
 	}
 	
-	public HCPQueryClient getHCPQueryClient() throws HSCException {
+	public HCPTenantManagement getHCPTenantManagementClient() throws HSCException {
+		if (tenantMgrClient == null) {
+			// 指定需要登录的HCP 租户 及 桶
+			String hcpdomain = Account.hcpdomain;
+			String tenant = Account.tenant;
+			// 登录需要的用户名
+			// The access key encoded by Base64
+			String accessKey = Account.accessKey;
+			// 登录需要的密码
+			// The AWS secret access key encrypted by MD5
+			String secretKey = Account.secretKey;
+
+			ClientConfiguration myClientConfig1 = new ClientConfiguration();
+			tenantMgrClient = HCPClientBuilder.tenantManagementClient()
+					.withEndpoint(hcpdomain)
+					.withTenant(tenant)
+					.withCredentials(new LocalCredentials(accessKey, secretKey))
+					.withClientConfiguration(myClientConfig1)
+					.bulid();
+
+		}
+
+		return tenantMgrClient;
+	}
+	
+	public HCPSystemManagement getHCPSystemManagementClient() throws HSCException {
+		if (systemMgrClient == null) {
+			// 指定需要登录的HCP 租户 及 桶
+			String hcpdomain = Account.hcpdomain;
+			// 登录需要的用户名
+			// The access key encoded by Base64
+			String accessKey = Account.system_accessKey;
+			// 登录需要的密码
+			// The AWS secret access key encrypted by MD5
+			String secretKey = Account.system_secretKey;
+
+			ClientConfiguration myClientConfig1 = new ClientConfiguration();
+			systemMgrClient = HCPClientBuilder.systemManagementClient()
+					.withEndpoint(hcpdomain)
+					.withCredentials(new LocalCredentials(accessKey, secretKey))
+					.withClientConfiguration(myClientConfig1)
+					.bulid();
+
+		}
+
+		return systemMgrClient;
+	}
+	
+	public HCPQuery getHCPQueryClient() throws HSCException {
 		if (hcpQueryClient == null) {
 			// 指定需要登录的HCP 租户 及 桶
 			String endpoint = Account.endpoint;
-			String namespace = Account.namespace;
 			// 登录需要的用户名
 			// The access key encoded by Base64
 			String accessKey = Account.accessKey;
@@ -100,7 +153,7 @@ public class HCPClients {
 			// Using HTTP protocol
 			clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTP);
 
-			 HCPQueryClientBuilder builder = HCPClientBuilder.queryClient();
+			HCPQueryClientBuilder builder = HCPClientBuilder.queryClient();
 			hcpQueryClient = builder.withClientConfiguration(clientConfig)
 					.withCredentials(new LocalCredentials(accessKey, secretKey))
 					.withEndpoint(endpoint)

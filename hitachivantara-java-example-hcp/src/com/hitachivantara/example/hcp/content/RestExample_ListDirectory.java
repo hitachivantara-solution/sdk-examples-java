@@ -6,8 +6,8 @@ import java.util.List;
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
+import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.api.ObjectEntryIterator;
-import com.hitachivantara.hcp.standard.body.HCPStandardClient;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntrys;
 
@@ -22,7 +22,7 @@ public class RestExample_ListDirectory {
 		{
 			long i = 0;
 			try {
-				HCPStandardClient hcpClient = HCPClients.getInstance().getHCPClient();
+				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				// Here is the folder path you want to list.
 				// 需要列出的目录名
