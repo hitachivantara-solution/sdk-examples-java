@@ -1,4 +1,4 @@
-package com.hitachivantara.example.hcp.content.multipartupload;
+package com.hitachivantara.example.hcp.util.multipartupload;
 
 import java.io.InputStream;
 import java.util.ArrayList;

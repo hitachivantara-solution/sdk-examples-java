@@ -1,4 +1,4 @@
-package com.hitachivantara.example.hcp.content.multipartupload;
+package com.hitachivantara.example.hcp.util.multipartupload;
 
 public interface UploadEventHandler {
 //	void partUploaded(int partNumber, long size, long startTime, long endTime);

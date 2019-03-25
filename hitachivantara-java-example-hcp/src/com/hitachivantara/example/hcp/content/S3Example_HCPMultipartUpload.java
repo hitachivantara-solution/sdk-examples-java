@@ -10,11 +10,11 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.hitachivantara.common.util.DigestUtils;
-import com.hitachivantara.example.hcp.content.multipartupload.MulitipartUploadException;
-import com.hitachivantara.example.hcp.content.multipartupload.MulitipartUploaderExecutor;
-import com.hitachivantara.example.hcp.content.multipartupload.UploadEventHandler;
 import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
+import com.hitachivantara.example.hcp.util.multipartupload.MulitipartUploadException;
+import com.hitachivantara.example.hcp.util.multipartupload.MulitipartUploaderExecutor;
+import com.hitachivantara.example.hcp.util.multipartupload.UploadEventHandler;
 
 /**
  * S3 分片上传示例

@@ -13,9 +13,9 @@ import com.amazonaws.services.s3.model.MultipartUploadListing;
 import com.amazonaws.services.s3.model.PartListing;
 import com.amazonaws.services.s3.model.PartSummary;
 import com.amazonaws.services.s3.model.UploadPartRequest;
-import com.hitachivantara.example.hcp.content.multipartupload.MulitipartUploadException;
 import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
+import com.hitachivantara.example.hcp.util.multipartupload.MulitipartUploadException;
 
 /**
  * S3 分片上传示例
