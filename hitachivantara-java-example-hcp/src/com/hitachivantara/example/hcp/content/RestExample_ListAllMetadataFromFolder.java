@@ -31,7 +31,7 @@ public class RestExample_ListAllMetadataFromFolder {
 
 				// 需要列出的目录名
 				// Here is the folder path you want to list.
-				String directoryKey = "sdk-test/moreThan100objs/";
+				String directoryKey = "example-hcp/moreThan100objs/";
 
 				// 遍历目录
 				// Request HCP to list all the objects in this folder.

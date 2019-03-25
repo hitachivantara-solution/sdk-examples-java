@@ -22,6 +22,8 @@ import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
  * HCP存储路径最佳实践示例
+ * </p>
+ * Example of key path best practices for HCP storage
  * 
  * @author sohan
  *
@@ -57,6 +59,7 @@ public class RestExample_PathOptimizing {
 		{
 			// ★★★路径优化设置★★★
 			// 指定Key算法后SDK将自动修正路径为优化路径，此方式适合不关心存储路径的需求，可以以Key Value方式存取数据。
+			// The actual path stored in HCP will be different with the key you specified. 
 			hcpClient.setKeyAlgorithm(KeyAlgorithm.CONSERVATIVE_KEY_HASH_D32);
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,8 +69,6 @@ public class RestExample_PathOptimizing {
 		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
 		String key = file.getName();
-
-		System.out.println("Actual store path in HCP: " + KeyAlgorithm.CONSERVATIVE_KEY_HASH_D32.generate(key));
 
 		{
 			// Check whether object exist.
@@ -99,13 +100,13 @@ public class RestExample_PathOptimizing {
 		}
 
 		// Verify result:
-		InputStream in = hcpObject.getContent();
-		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
-		byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
-		in.close();
-
-		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
-		assertTrue(equals == true);
+//		InputStream in = hcpObject.getContent();
+//		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
+//		byte[] objectFromHCPMd5 = DigestUtils.calcMD5(in);
+//		in.close();
+//
+//		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
+//		assertTrue(equals == true);
 
 		System.out.println("Well done!");
 	}

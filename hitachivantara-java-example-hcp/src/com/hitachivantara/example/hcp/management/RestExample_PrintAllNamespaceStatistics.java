@@ -12,9 +12,9 @@ import com.hitachivantara.hcp.management.model.NamespaceSettings;
  * @author sohan
  *
  */
-public class Example_PrintAllNamespaceStatistics {
+public class RestExample_PrintAllNamespaceStatistics {
 
-	public Example_PrintAllNamespaceStatistics() {
+	public RestExample_PrintAllNamespaceStatistics() {
 	}
 
 	public static void main(String[] args) throws HSCException {

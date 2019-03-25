@@ -1,4 +1,4 @@
-package com.hitachivantara.example.hcp.content;
+package com.hitachivantara.example.hcp.search;
 
 import java.io.IOException;
 import java.util.List;

@@ -60,44 +60,22 @@ public class S3Example_PutGetDeleteObject {
 		// Here is the file will be uploaded into HCP
 		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = "folder11/subfolder111/" + file.getName();
+		String key = "example-hcp/subfolder1/" + file.getName();
 		String bucketName = Account.namespace;
 		
-		key="baodan/shouxian/2019/03/11/65434532.pdf";
 		{
 			try {
 				// 上传文件至HCP
 				// 上传前无需刻意创建目录，只需指定存储路径
 				// Inject file into HCP system.
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				hs3Client.putObject(bucketName, key, file);
-				
-//				PutObjectRequest re = new PutObjectRequest(bucketName, "image/p1.jpg", new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\P1.jpg"));
-//				re.putCustomRequestHeader("Content-Type", "image/png");
-//				hs3Client.putObject(re);
-//				hs3Client.putObject(new PutObjectRequest(bucketName, key, file).with)
-				
-				System.out.println("L="+file.length());
-//				hs3Client.putObject(new PutObjectRequest(bucketName, key, file));
-//				.withGeneralProgressListener(new ProgressListener() {
-//
-//					@Override
-//					public void progressChanged(ProgressEvent progressEvent) {
-//						// TODO Auto-generated method stub
-//						System.out.println(progressEvent.getEventType()+" / "+progressEvent.getBytes());
-//					}}));
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Check whether object exist.
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				boolean exist = hs3Client.doesObjectExist(bucketName, key);
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				assertTrue(exist == true);
 
 				// Get the object from HCP
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				s3Object = hs3Client.getObject(bucketName, key);
-				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 			} catch (AmazonServiceException e) {
 				e.printStackTrace();
 				return;
@@ -118,16 +96,14 @@ public class S3Example_PutGetDeleteObject {
 		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
 		assertTrue(equals == true);
 		
-//		{
-//			// Delete object in HCP.
-//			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-//			hs3Client.deleteObject(bucketName, key);
-//			//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-//			
-//			// Check whether object exist.
-//			boolean exist = hs3Client.doesObjectExist(bucketName, key);
-//			assertTrue(exist == false);
-//		}
+		{
+			// Delete object in HCP.
+			hs3Client.deleteObject(bucketName, key);
+			
+			// Check whether object exist.
+			boolean exist = hs3Client.doesObjectExist(bucketName, key);
+			assertTrue(exist == false);
+		}
 		
 		System.out.println("Well done!");
 	}

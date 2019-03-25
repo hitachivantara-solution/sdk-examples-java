@@ -16,9 +16,9 @@ import com.hitachivantara.hcp.management.define.QuotaUnit;
 import com.hitachivantara.hcp.management.model.NamespaceSettings;
 import com.hitachivantara.hcp.management.model.builder.SettingBuilders;
 
-public class Example_NamespaceModify {
+public class RestExample_NamespaceModify {
 
-	public Example_NamespaceModify() {
+	public RestExample_NamespaceModify() {
 	}
 
 	public static void main(String[] args) throws HSCException {

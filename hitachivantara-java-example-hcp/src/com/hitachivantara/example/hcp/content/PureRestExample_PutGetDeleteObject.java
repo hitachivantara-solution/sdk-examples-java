@@ -5,78 +5,33 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.Date;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.Account;
+import com.hitachivantara.example.hcp.util.SSLUtils;
 
 /**
- * 未使用sdk操作对象存储取得删除示例 
+ * 未使用sdk操作对象存储取得删除示例
+ * </p>
+ * using rest api directly to operate HCP
  * 
  * @author sohan
  *
  */
 public class PureRestExample_PutGetDeleteObject {
-	/**
-	 * * 跳过证书验证
-	 */
-	private static final TrustManager[] DUMMY_TRUST_MGR = new TrustManager[] { new X509TrustManager() {
-		public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-			return new java.security.cert.X509Certificate[] {};
-		}
-
-		@Override
-		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-		}
-
-		@Override
-		public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-		}
-	} };
-
-	/**
-	 * 跳过主机验证
-	 */
-	private static final HostnameVerifier DUMMY_HOST_NAME_VERIFIER = new HostnameVerifier() {
-		@Override
-		public boolean verify(String hostname, SSLSession session) {
-			return true;
-		}
-	};
-
-	/**
-	 * 信任所有
-	 * 
-	 * @param connection
-	 * @return
-	 */
-	private static SSLSocketFactory trustAll(HttpsURLConnection connection) {
-		connection.setHostnameVerifier(DUMMY_HOST_NAME_VERIFIER);
-
-		SSLSocketFactory oldFactory = connection.getSSLSocketFactory();
-		try {
-			SSLContext sc = SSLContext.getInstance("TLS");
-			sc.init(null, DUMMY_TRUST_MGR, new java.security.SecureRandom());
-			SSLSocketFactory newFactory = sc.getSocketFactory();
-			connection.setSSLSocketFactory(newFactory);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return oldFactory;
-	}
 
 	public static void main(String[] args) throws MalformedURLException {
+		// ********************************************************
+		// !Attention!!Attention!!Attention!!Attention!!Attention!
+		// 此示例需HCP开启REST接口以及HTTP 或 HTTPS协议
+		// ********************************************************
+
+		// 配置所用的协议
+		// Configure the protocol type to be used
 		final String protocol = "https";// "http"
 		String endpoint = Account.endpoint;
 		String namespace = Account.namespace;
@@ -87,13 +42,14 @@ public class PureRestExample_PutGetDeleteObject {
 
 		// ------------------------------------------------------------------------------------------------------------------------
 		// 通过REST上传一个文件至HCP
+		// Upload file or input stream into HCP system by REST API
 		// Using a Namespace > HTTP > Working with objects and versions > Request contents
 		// ------------------------------------------------------------------------------------------------------------------------
 		try {
 			connection = (HttpURLConnection) url.openConnection(); // 创建一个HTTP连接
 
 			if (url.getProtocol().equalsIgnoreCase("https")) {
-				trustAll((HttpsURLConnection) connection);
+				SSLUtils.trustAll((HttpsURLConnection) connection);
 			}
 
 			connection.setRequestMethod("PUT"); // 指定使用PUT请求方式
@@ -119,6 +75,7 @@ public class PureRestExample_PutGetDeleteObject {
 						System.out.println("Verify contents=" + (etag.equals(localEtag)));
 					} else {
 						// 验证失败处理.....
+						System.out.println("Data upload failed!  Content inconsistency!");
 					}
 				}
 
@@ -137,13 +94,14 @@ public class PureRestExample_PutGetDeleteObject {
 
 		// ------------------------------------------------------------------------------------------------------------------------
 		// 通过REST从HCP下载一个文件
+		// Download object from HCP via REST API
 		// Using a Namespace > HTTP > Working with objects and versions > Request contents
 		// ------------------------------------------------------------------------------------------------------------------------
 		try {
 			connection = (HttpURLConnection) url.openConnection(); // 创建一个HTTP连接
 
 			if (url.getProtocol().equalsIgnoreCase("https")) {
-				trustAll((HttpsURLConnection) connection);
+				SSLUtils.trustAll((HttpsURLConnection) connection);
 			}
 
 			connection.setRequestMethod("GET"); // 指定使用GET请求方式
@@ -183,7 +141,7 @@ public class PureRestExample_PutGetDeleteObject {
 			connection = (HttpURLConnection) url.openConnection(); // 创建一个HTTP连接
 
 			if (url.getProtocol().equalsIgnoreCase("https")) {
-				trustAll((HttpsURLConnection) connection);
+				SSLUtils.trustAll((HttpsURLConnection) connection);
 			}
 
 			connection.setRequestMethod("DELETE"); // 指定使用GET请求方式

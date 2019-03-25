@@ -14,9 +14,9 @@ import com.hitachivantara.hcp.management.model.TenantSettings;
  * @author sohan
  *
  */
-public class Example_PrintAllTenantStatistics {
+public class RestExample_PrintAllTenantStatistics {
 
-	public Example_PrintAllTenantStatistics() {
+	public RestExample_PrintAllTenantStatistics() {
 	}
 
 	public static void main(String[] args) throws HSCException {

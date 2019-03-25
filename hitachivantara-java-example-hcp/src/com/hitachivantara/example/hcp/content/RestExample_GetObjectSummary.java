@@ -12,7 +12,9 @@ import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.HCPObjectSummary;
 
 /**
- * 获取对象概要信息
+ * 仅获取对象概要信息
+ * </p>
+ * Gets the object summary information only, Not include content body.
  * 
  * @author sohan
  *
@@ -27,7 +29,7 @@ public class RestExample_GetObjectSummary {
 				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				// 获取当前对象的摘要信息
-				 HCPObjectSummary summary = hcpClient.getObjectSummary("folder/subfolder/WeChat Image_20180716111626.doc");
+				 HCPObjectSummary summary = hcpClient.getObjectSummary("example-hcp/moreThan100objs/file-1-0.txt");
 
 				// 获取指定对象的摘要信息
 //				HCPObjectSummary summary = hcpClient.getObjectSummary(new CheckObjectRequest()

@@ -10,7 +10,9 @@ import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.NamespaceStatistics;
 
 /**
- * 统计桶信息示例
+ * 统计桶信息(如总容量，已用容量，对象数量等)示例
+ * </p>
+ * Example of statistics bucket, Get information such as total capacity, used capacity, number of objects, etc.
  * 
  * @author sohan
  *

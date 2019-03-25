@@ -1,6 +1,7 @@
 package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.util.StreamUtils;
@@ -16,6 +17,8 @@ import com.hitachivantara.hcp.standard.model.request.impl.ListObjectRequest;
 
 /**
  * 列出指定目录下所有对象的示例，包括子目录
+ * </p>
+ * List all objects in the specified directory including sub directories
  * 
  * @author sohan
  *
@@ -29,7 +32,7 @@ public class RestExample_ListObjects {
 
 				// 需要列出的目录名
 				// Here is the folder path you want to list.
-				String directoryKey = "sdk-test/moreThan100objs/";
+				String directoryKey = "example-hcp/moreThan100objs/";
 
 				// 遍历目录
 				// Request HCP to list all the objects in this folder.
@@ -47,15 +50,31 @@ public class RestExample_ListObjects {
 //							}
 //						})
 						;
+				
 				hcpClient.listObjects(request, new ListObjectHandler() {
 					 int i = 0;
 
 					// 发现的对象信息
 					@Override
-					public NextAction foundObject(HCPObjectSummary objectSummary) throws HSCException {
-						 System.out.println(++i + "\t" + objectSummary.getSize() + "\t" + objectSummary.getContentHash() + "\t" + objectSummary.getKey() + "\t" +
-						 objectSummary.getType());
+					public NextAction foundObject(HCPObjectSummary obj) throws HSCException {
+						 System.out.println(++i + "\t" + obj.getSize() + "\t" + obj.getKey() + "\t" + obj.getType() + "\t" + obj.getContentHash());
 
+						// 做一些事情，例如打印文件内容
+						// You can do something more...
+//						try {
+//							InputStream content = hcpClient.getObject(obj.getKey()).getContent();
+//							System.out.print("Content:");
+//							StreamUtils.inputStreamToConsole(content, true);
+//							System.out.println();
+//						} catch (IOException e) {
+//						}
+
+						// 如需要可以停止列出目录
+						// You can add specific conditions to stop the listing action
+//						if (i == 88) {
+//							return NextAction.stop;
+//						}
+						 
 						return null;
 					}
 				});

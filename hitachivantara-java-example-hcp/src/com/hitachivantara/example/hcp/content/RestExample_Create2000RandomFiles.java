@@ -13,36 +13,36 @@ import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
 /**
  * 使用多线程创建100随机内容个文件
+ * </p>
+ * Create 100 random content files using multiple threads
  * 
  * @author sohan
  *
  */
-public class RestExample_Create100RandomFiles {
+public class RestExample_Create2000RandomFiles {
 
 	public static void main(String[] args) throws IOException {
 		{
 			try {
 				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
-				// Here is the folder path you want to list.
-				// 需要列出的目录名
-				final String directoryKey = "sdk-test/moreThan100objs/";
+				// Here is the folder path you want to store files.
+				final String directoryKey = "example-hcp/moreThan100objs/";
 
-				// 使用多线程（5个线程每个线程创建100个）创建100随机内容个文件
-				// Request HCP to list all the objects in this folder.
+				// 使用多线程（10个线程每个线程创建200个）创建100随机内容个文件
 				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				for (int i = 0; i < 5; i++) {
+				for (int i = 0; i < 10; i++) {
 					final int id = i;
 
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
 
-							for (int j = 0; j < 20; j++) {
+							for (int j = 0; j < 200; j++) {
 								String key = directoryKey + "file-" + id + "-" + j + ".txt";
 								try {
-									String content = new Date().toString()+" "+RandomInputStream.randomInt(10000, 99999);
-									
+									String content = new Date().toString() + " " + RandomInputStream.randomInt(10000, 99999);
+
 									PutObjectResult result = hcpClient.putObject(new PutObjectRequest(key).withContent(content));
 
 									System.out.println("Create file: " + key + " " + result.getETag());

@@ -62,40 +62,29 @@ public class S3Example_ListObjects {
 			long i = 0;
 			try {
 				// Here is the folder path you want to list.
-				String directoryKey = "Folder/moreThan100objs/";
+				String directoryKey = "example-hcp/moreThan100objs/";
 
 				// Request HCP to list all the objects in this folder.
-				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				// 罗列此目录以及子目录的所有对象，包括目录本身
 //				ObjectListing objlisting = hs3Client.listObjects(new ListObjectsRequest().withBucketName(bucketName).withPrefix(directoryKey));
 				// 仅罗列此目录所有对象，包括目录本身
 				ObjectListing objlisting = hs3Client.listObjects(new ListObjectsRequest().withBucketName(bucketName).withPrefix(directoryKey).withDelimiter("/"));
-				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 
 				// Printout objects
+				do {
+					List<S3ObjectSummary> objs = objlisting.getObjectSummaries();
+					for (S3ObjectSummary obj : objs) {
+						System.out.println(++i + "\t" + obj.getSize() + "\t" + obj.getETag() + "\t" + obj.getKey());
+					}
+					objlisting = hs3Client.listNextBatchOfObjects(objlisting);
+				} while (objlisting.isTruncated());
+				
+				// Printout remain items
 				List<S3ObjectSummary> objs = objlisting.getObjectSummaries();
-				for (S3ObjectSummary s3ObjectSummary : objs) {
-					System.out.println(++i + "\t" + s3ObjectSummary.getSize() + "\t" + s3ObjectSummary.getETag() + "\t" + s3ObjectSummary.getKey());
+				for (S3ObjectSummary obj : objs) {
+					System.out.println(++i + "\t" + obj.getSize() + "\t" + obj.getETag() + "\t" + obj.getKey());
 				}
-
-				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				// 翻页打印-每页1000
-				ObjectListing nextObjlisting = objlisting;
-				while (true) {
-					nextObjlisting = hs3Client.listNextBatchOfObjects(nextObjlisting);
-
-					// Printout objects
-					List<S3ObjectSummary> nextobjs = nextObjlisting.getObjectSummaries();
-					for (S3ObjectSummary s3ObjectSummary : nextobjs) {
-						System.out.println(++i + "\t" + s3ObjectSummary.getSize() + "\t" + s3ObjectSummary.getETag() + "\t" + s3ObjectSummary.getKey());
-					}
-
-					if (!nextObjlisting.isTruncated()) {
-						break;
-					}
-				}
-				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-
+				
 			} catch (AmazonServiceException e) {
 				e.printStackTrace();
 				return;

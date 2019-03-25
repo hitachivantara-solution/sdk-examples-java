@@ -27,7 +27,7 @@ public class S3Example_CreateGetListVersions {
 		// Here is the file will be uploaded into HCP
 		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = "folder/subfolder/" + file.getName();
+		String key = "example-hcp/subfolder1/" + file.getName();
 		String bucketName = Account.namespace;
 
 		// 创建一些版本，请确认Versioning功能已经开启，否侧此处会出现异常。

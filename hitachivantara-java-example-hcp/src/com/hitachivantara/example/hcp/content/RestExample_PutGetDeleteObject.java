@@ -18,9 +18,13 @@ import com.hitachivantara.hcp.common.auth.LocalCredentials;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.HCPObject;
+import com.hitachivantara.hcp.standard.model.request.impl.DeleteObjectRequest;
+import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
 /**
  * 对象存储取得删除示例 包括创建client端
+ * </p>
+ * Examples of how to upload, retrieve, delete object include creating a client side
  * 
  * @author sohan
  *
@@ -28,11 +32,11 @@ import com.hitachivantara.hcp.standard.model.HCPObject;
 public class RestExample_PutGetDeleteObject {
 
 	public static void main(String[] args) throws IOException, HSCException {
-		HCPNamespace hcpClient = null;
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		// 创建HCP访问客户端，客户端仅需要创建一次
+		// Create an HCP access client. The client needs to be created only once
+		HCPNamespace hcpClient = null;
 		{
-			// 创建HCP访问客户端，客户端仅需要创建一次
-			// Create s3 client
 			// 指定需要登录的HCP 租户 及 桶
 			String endpoint = Account.endpoint;
 			String namespace = Account.namespace;
@@ -61,7 +65,7 @@ public class RestExample_PutGetDeleteObject {
 		// Here is the file will be uploaded into HCP
 		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = "rison/subfolder/" + file.getName();
+		String key = "example-hcp/subfolder1/" + file.getName();
 
 		{
 			// 上传文件至HCP
@@ -84,8 +88,10 @@ public class RestExample_PutGetDeleteObject {
 				e.printStackTrace();
 			}
 		}
+		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// 获得数据流
+		// Get the stream
 		InputStream in = hcpObject.getContent();
 		// 可以将文件保存至本地目录
 		// StreamUtils.inputStreamToFile(in, "C:\\myfile.doc", true)
@@ -100,16 +106,17 @@ public class RestExample_PutGetDeleteObject {
 			assertTrue(equals == true);
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-		// {
-		// // 通过delete方法可以删除对象
-		// hcpClient.deleteObject(key);
-		//
-		// // Check whether object exist.
-		// boolean exist = hcpClient.doesObjectExist(key);
-		// assertTrue(exist == false);
-		// }
-
+		{
+			// 通过delete方法可以删除对象
+			hcpClient.deleteObject(key);
+			// or
+			// 可以使用Purge删除对象
+//			 hcpClient.deleteObject(new DeleteObjectRequest(key).withPurge(true));
+			//
+			// Check whether object exist.
+			boolean exist = hcpClient.doesObjectExist(key);
+			assertTrue(exist == false);
+		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		System.out.println("Well done!");
