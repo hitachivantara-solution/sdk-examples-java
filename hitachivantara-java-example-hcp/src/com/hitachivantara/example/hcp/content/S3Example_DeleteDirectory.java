@@ -34,18 +34,17 @@ public class S3Example_DeleteDirectory {
 		final String directoryKey = "example-hcp/subfolder" + RandomInputStream.randomInt(100, 999);
 		String bucketName = Account.namespace;
 
-		// Create a file for below metadata operation.
+		// Create an folder for delete
 		{
 			AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();
 			S3Example_CreateDirectory.createFolder(bucketName, directoryKey, hs3Client);
-		}
 
-		{
 			boolean exist = HCPClients.getInstance().getHCPClient().doesDirectoryExist(directoryKey);
-
+			
 			System.out.println("Directory " + (exist ? "exist!" : "not exist!"));
 		}
 
+		// Delete this empty folder.
 		{
 			AmazonS3 hs3Client = HCPClients.getInstance().getS3Client();
 

@@ -22,9 +22,9 @@ import com.hitachivantara.hcp.management.model.builder.SettingBuilders;
  * @author sohan
  *
  */
-public class RestExample_NamespaceCreate {
+public class RestExample_NamespaceCreateDelete {
 
-	public RestExample_NamespaceCreate() {
+	public RestExample_NamespaceCreateDelete() {
 		// TODO Auto-generated constructor stub
 	}
 
