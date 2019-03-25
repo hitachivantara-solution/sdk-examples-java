@@ -36,7 +36,7 @@ public class PureRestExample_PutGetDeleteObject {
 		String endpoint = Account.endpoint;
 		String namespace = Account.namespace;
 		final String rest = protocol + "://" + namespace + "." + endpoint + "/rest/"; // 要提交的目标地址
-		String key = "hcp-test1/Test1-1.log";
+		String key = "example-hcp/Test1-1.log";
 		final URL url = new URL(rest + key);
 		HttpURLConnection connection = null;
 
@@ -70,7 +70,7 @@ public class PureRestExample_PutGetDeleteObject {
 				{
 					// 通过数据签名验证验证本地数据与上传成功的数据一致
 					String etag = connection.getHeaderField("ETag");
-					String localEtag = "\"" + DigestUtils.calcMD5ToHex(data) + "\""; // 此处为MD5计算，无需第三方lib
+					String localEtag = ("\"" + DigestUtils.calcMD5ToHex(data) + "\"").toLowerCase(); // 此处为MD5计算，无需第三方lib
 					if (etag.equals(localEtag)) {
 						System.out.println("Verify contents=" + (etag.equals(localEtag)));
 					} else {

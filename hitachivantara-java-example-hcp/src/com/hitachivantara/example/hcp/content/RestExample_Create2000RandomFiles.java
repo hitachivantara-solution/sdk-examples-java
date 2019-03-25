@@ -12,9 +12,9 @@ import com.hitachivantara.hcp.standard.model.PutObjectResult;
 import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 
 /**
- * 使用多线程创建100随机内容个文件
+ * 使用多线程创建2000随机内容个文件
  * </p>
- * Create 100 random content files using multiple threads
+ * Create 2000 random content files using multiple threads
  * 
  * @author sohan
  *
