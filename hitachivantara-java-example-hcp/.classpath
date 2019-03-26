@@ -15,11 +15,11 @@
 	<classpathentry kind="lib" path="lib/s3/joda-time-2.8.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="lib/hcp/jaxen-1.1.6.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.1.363.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.1.363.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-annotations-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-core-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-databind-2.6.7.1.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-dataformat-cbor-2.6.7.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/hitachivantara-java-sdk-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/hitachivantara-java-sdk-hcp"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

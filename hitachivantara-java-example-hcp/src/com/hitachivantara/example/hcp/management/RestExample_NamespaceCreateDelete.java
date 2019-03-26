@@ -24,10 +24,6 @@ import com.hitachivantara.hcp.management.model.builder.SettingBuilders;
  */
 public class RestExample_NamespaceCreateDelete {
 
-	public RestExample_NamespaceCreateDelete() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static void main(String[] args) throws HSCException {
 		// 需要HCP开启管理功能API,并使用管理用户
 		HCPTenantManagement namespaceClient = HCPClients.getInstance().getHCPTenantManagementClient();
@@ -60,21 +56,6 @@ public class RestExample_NamespaceCreateDelete {
 		NamespaceSettings namespaceSetting1 = SettingBuilders.createNamespaceBuilder()
 				.withName(ns)
 				.withHardQuota(11.2, QuotaUnit.GB)
-				.withSoftQuota(66)
-				.withHashScheme(HashScheme.SHA512)
-				.withMultipartUploadAutoAbortDays(6)
-				.withOptimizedFor(OptimizedFor.CLOUD)
-				.withAclsUsage(AclsUsage.ENFORCED)
-				.withCustomMetadataIndexingEnabled(true)
-				.withSearchEnabled(true)
-				.withVersioningEnabled(true)
-				.withVersioningKeepDeletionRecords(false)
-				.withVersioningPrune(false)
-				.withVersioningPruneDays(9)
-				.withIndexingEnabled(true)
-				// .withOwner(OwnerType.LOCAL, localUserName1 )
-				// .withEnterpriseMode(true)
-				// .withTags("AAA","BBB","中文")
 				.bulid();
 		// 执行创建桶
 		namespaceClient.createNamespace(namespaceSetting1);

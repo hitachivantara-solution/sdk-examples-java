@@ -47,16 +47,7 @@ public class HCPClients {
 			// The AWS secret access key encrypted by MD5
 			String secretKey = Account.secretKey;
 
-			com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
-			// Using HTTP protocol
-			clientConfig.setProtocol(com.amazonaws.Protocol.HTTP);
-			clientConfig.setSignerOverride("S3SignerType");
-
-			hs3Client = AmazonS3ClientBuilder.standard()
-					.withClientConfiguration(clientConfig)
-					.withEndpointConfiguration(new EndpointConfiguration(endpoint, ""))
-					.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
-					.build();
+			hs3Client = newS3Client(endpoint, accessKey, secretKey);
 		}
 
 		return hs3Client;
@@ -74,20 +65,41 @@ public class HCPClients {
 			// The AWS secret access key encrypted by MD5
 			String secretKey = Account.secretKey;
 
-			ClientConfiguration clientConfig = new ClientConfiguration();
-			clientConfig.setConnectTimeout(2000);
-			// Using HTTP protocol
-			clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTPS);
-
-			HCPNamespaceClientBuilder builder = HCPClientBuilder.defaultHCPClient();
-			hcpClient = builder.withClientConfiguration(clientConfig)
-					.withCredentials(new LocalCredentials(accessKey, secretKey))
-					.withEndpoint(endpoint)
-					.withNamespace(namespace)
-					.bulid();
+			hcpClient = newHCPClient(endpoint, namespace, accessKey, secretKey);
 		}
 
 		return hcpClient;
+	}
+	
+	public HCPNamespace newHCPClient(String endpoint, String namespace, String accessKey, String secretKey) throws HSCException {
+		ClientConfiguration clientConfig = new ClientConfiguration();
+		clientConfig.setConnectTimeout(2000);
+		// Using HTTP protocol
+		clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTPS);
+
+		HCPNamespaceClientBuilder builder = HCPClientBuilder.defaultHCPClient();
+		HCPNamespace hcpClient = builder.withClientConfiguration(clientConfig)
+				.withCredentials(new LocalCredentials(accessKey, secretKey))
+				.withEndpoint(endpoint)
+				.withNamespace(namespace)
+				.bulid();
+
+		return hcpClient;
+	}
+	
+	public AmazonS3 newS3Client(String endpoint, String accessKey, String secretKey) {
+		com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
+		// Using HTTP protocol
+		clientConfig.setProtocol(com.amazonaws.Protocol.HTTP);
+		clientConfig.setSignerOverride("S3SignerType");
+
+		AmazonS3 hs3Client = AmazonS3ClientBuilder.standard()
+				.withClientConfiguration(clientConfig)
+				.withEndpointConfiguration(new EndpointConfiguration(endpoint, ""))
+				.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
+				.build();
+
+		return hs3Client;
 	}
 	
 	public HCPTenantManagement getHCPTenantManagementClient() throws HSCException {

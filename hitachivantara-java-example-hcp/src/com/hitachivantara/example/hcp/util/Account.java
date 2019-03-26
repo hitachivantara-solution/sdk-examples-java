@@ -24,8 +24,8 @@ public class Account {
 	 public final static String accessKey = "YWRtaW4=";
 	 // The secret access key (hcp1234567) encrypted by MD5
 	 public final static String secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
+	 
 	 public final static String system_accessKey = "YWRtaW4=";
-	 // The secret access key (hcp1234567) encrypted by MD5
 	 public final static String system_secretKey = "161ebd7d45089b3446ee4e0d86dbcf92";
 
 	public final static String HCP_AUTHORIZATION = "HCP " + accessKey + ":" + secretKey;
