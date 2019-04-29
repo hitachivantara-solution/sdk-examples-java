@@ -71,11 +71,27 @@ public class HCPClients {
 		return hcpClient;
 	}
 	
+
 	public HCPNamespace newHCPClient(String endpoint, String namespace, String accessKey, String secretKey) throws HSCException {
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setConnectTimeout(2000);
 		// Using HTTP protocol
 		clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTPS);
+		
+		// myClientConfig.setProxy("10.129.215.166", 9090);
+		// myClientConfig.setProxyUsername(proxyUsername);
+
+//		 InMemoryDnsResolver dnsResolver = new InMemoryDnsResolver();
+//		 dnsResolver.setUnsolvableException(true);
+//		 dnsResolver.add("cloud.tn9.hcp8.hdim.lab", "10.129.214.75");
+//		 dnsResolver.add("admin.hcp8.hdim.lab", "10.129.214.75");
+////		 dnsResolver.add("tn9.hcp8.hdim.lab", "10.129.214.75");
+//		 myClientConfig.setDnsResolver(dnsResolver);
+//		 dnsResolver.add("song1.tn1.hcpvm.bjlab.poc", "10.129.215.61");
+//		 dnsResolver.add("song1.tn1.hcpvm.bjlab.poc", "10.129.215.62");
+//		 dnsResolver.add("song1.tn1.hcpvm.bjlab.poc", "10.129.215.63");
+//		 dnsResolver.add("song1.tn1.hcpvm.bjlab.poc", "10.129.215.64");
+
 
 		HCPNamespaceClientBuilder builder = HCPClientBuilder.defaultHCPClient();
 		HCPNamespace hcpClient = builder.withClientConfiguration(clientConfig)

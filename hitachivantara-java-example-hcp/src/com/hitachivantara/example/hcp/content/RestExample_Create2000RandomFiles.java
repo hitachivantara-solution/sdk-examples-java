@@ -31,14 +31,14 @@ public class RestExample_Create2000RandomFiles {
 
 				// 使用多线程（10个线程每个线程创建200个）创建100随机内容个文件
 				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 100; i++) {
 					final int id = i;
 
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
 
-							for (int j = 0; j < 200; j++) {
+							for (int j = 0; j < 2000; j++) {
 								String key = directoryKey + "file-" + id + "-" + j + ".txt";
 								try {
 									String content = new Date().toString() + " " + RandomInputStream.randomInt(10000, 99999);

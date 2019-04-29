@@ -2,8 +2,10 @@ package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 import com.hitachivantara.common.ex.HSCException;
+import com.hitachivantara.common.util.DateUtils;
 import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
@@ -57,7 +59,17 @@ public class RestExample_ListObjects {
 					// 发现的对象信息
 					@Override
 					public NextAction foundObject(HCPObjectSummary obj) throws HSCException {
-						 System.out.println(++i + "\t" + obj.getSize() + "\t" + obj.getKey() + "\t" + obj.getType() + "\t" + obj.getContentHash());
+						System.out.println(++i
+								+ "\t"
+								+ obj.getSize()
+								+ "\t"
+								+ obj.getKey()
+								+ "\t"
+								+ obj.getType()
+								+ "\t"
+								+ DateUtils.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
+								+ "\t"
+								+ obj.getContentHash());
 
 						// 做一些事情，例如打印文件内容
 						// You can do something more...

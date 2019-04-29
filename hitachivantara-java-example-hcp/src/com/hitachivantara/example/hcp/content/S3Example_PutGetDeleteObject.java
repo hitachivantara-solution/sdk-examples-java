@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 import com.amazonaws.AmazonServiceException;
@@ -16,6 +17,9 @@ import com.amazonaws.event.ProgressEvent;
 import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CopyObjectRequest;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
@@ -85,6 +89,7 @@ public class S3Example_PutGetDeleteObject {
 			}
 		}
 
+		// ↓↓↓=*=*=* CODE JUST FOR DEMONSTRATE, UNNECESSARY IN PRODUCTION ENVIRONMENT *=*=*=↓↓↓
 		// Verify result:
 		S3ObjectInputStream in = s3Object.getObjectContent();
 //		StreamUtils.inputStreamToFile(in, filePath, true);
@@ -95,7 +100,8 @@ public class S3Example_PutGetDeleteObject {
 //
 		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
 		assertTrue(equals == true);
-		
+		// ↑↑↑=*=*=* CODE JUST FOR DEMONSTRATE, UNNECESSARY IN PRODUCTION ENVIRONMENT *=*=*=↑↑↑
+
 		{
 			// Delete object in HCP.
 			hs3Client.deleteObject(bucketName, key);

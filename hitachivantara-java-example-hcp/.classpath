@@ -19,7 +19,7 @@
 	<classpathentry kind="lib" path="lib/hcp/jackson-core-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-databind-2.6.7.1.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-dataformat-cbor-2.6.7.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.1.373.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.1.373.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.1.384.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.1.384.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

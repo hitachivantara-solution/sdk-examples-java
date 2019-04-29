@@ -1,9 +1,11 @@
 package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import com.hitachivantara.common.ex.HSCException;
+import com.hitachivantara.common.util.DateUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.HCPNamespace;
@@ -45,7 +47,17 @@ public class RestExample_ListDirectory {
 				List<HCPObjectEntry> objs;
 				while ((objs = it.next(100)) != null) {
 					for (HCPObjectEntry obj : objs) {
-						System.out.println(++i + "\t" + obj.getSize() + "\t" + obj.getContentHash() + "\t" + obj.getKey() + "\t" + obj.getType());
+						System.out.println(++i
+								+ "\t"
+								+ obj.getSize()
+								+ "\t"
+								+ obj.getKey()
+								+ "\t"
+								+ obj.getType()
+								+ "\t"
+								+ DateUtils.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
+								+ "\t"
+								+ obj.getContentHash());
 					}
 				}
 

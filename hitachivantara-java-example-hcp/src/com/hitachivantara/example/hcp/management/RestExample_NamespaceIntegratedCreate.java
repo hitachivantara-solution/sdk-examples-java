@@ -26,7 +26,7 @@ import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.model.HCPObject;
 
 /**
- * 创建桶示例
+ * 创建桶示例，包括指定创建参数，创建用户以及配权限
  * 
  * @author sohan
  *

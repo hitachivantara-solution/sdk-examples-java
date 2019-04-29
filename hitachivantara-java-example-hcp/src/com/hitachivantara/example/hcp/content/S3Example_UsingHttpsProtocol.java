@@ -106,6 +106,7 @@ public class S3Example_UsingHttpsProtocol {
 			}
 		}
 
+		// ↓↓↓=*=*=* CODE JUST FOR DEMONSTRATE, UNNECESSARY IN PRODUCTION ENVIRONMENT *=*=*=↓↓↓
 		// Verify result:
 		S3ObjectInputStream in = s3Object.getObjectContent();
 		byte[] orginalFileMd5 = DigestUtils.calcMD5(file);
@@ -114,7 +115,8 @@ public class S3Example_UsingHttpsProtocol {
 
 		boolean equals = Arrays.equals(orginalFileMd5, objectFromHCPMd5);
 		assertTrue(equals == true);
-		
+		// ↑↑↑=*=*=* CODE JUST FOR DEMONSTRATE, UNNECESSARY IN PRODUCTION ENVIRONMENT *=*=*=↑↑↑
+
 		{
 			// Delete object in HCP.
 			hs3Client.deleteObject(bucketName, key);

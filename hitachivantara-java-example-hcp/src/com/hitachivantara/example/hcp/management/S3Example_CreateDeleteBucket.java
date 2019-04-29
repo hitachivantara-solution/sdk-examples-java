@@ -23,9 +23,9 @@ public class S3Example_CreateDeleteBucket {
 
 			String bucketName = "bucket000";
 			// Need to [Enable management through APIs] and login user has [Allow namespace management] in HCP
+//			hs3Client.deleteBucket(bucketName);
 			hs3Client.createBucket(bucketName);
 
-			// hs3Client.deleteBucket(bucketName);
 		}
 
 	}
