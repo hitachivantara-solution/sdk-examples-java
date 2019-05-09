@@ -76,7 +76,9 @@ public class HCPClients {
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setConnectTimeout(2000);
 		// Using HTTP protocol
-		clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTPS);
+		clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTP);
+		clientConfig.setDefaultMaxConnectionsPerRoute(20);
+		clientConfig.setMaxConnections(20);
 		
 		// myClientConfig.setProxy("10.129.215.166", 9090);
 		// myClientConfig.setProxyUsername(proxyUsername);

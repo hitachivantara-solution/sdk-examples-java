@@ -62,7 +62,7 @@ public class QueryExample_BasedQuery {
 		// 设置搜索语法 更多搜索语法可以参考《HCP搜索接口介绍.doc》
 
 		// 搜索key包含abcdefg的文件
-		 request.setQuery("+(objectPath:abcdefg)");
+		 request.setQuery("+(objectPath:ab)");
 		// 搜索元数据中包含身份证110223201009028931的文件
 		// request.setQuery("+(customMetadataContent:110223201009028931)");
 		// 搜索元数据中包含male并且文件key包含beijing的文件

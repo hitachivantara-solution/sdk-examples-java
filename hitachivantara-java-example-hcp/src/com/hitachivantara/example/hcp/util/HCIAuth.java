@@ -4,14 +4,14 @@ import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.core.http.HttpResponse;
 import com.hitachivantara.core.http.client.ClientConfiguration;
 import com.hitachivantara.core.http.client.HttpClientBuilder;
-import com.hitachivantara.core.http.client.impl.DefaultHttpClientBuilder;
+import com.hitachivantara.core.http.client.impl.SimpleHttpClientBuilder;
 import com.hitachivantara.core.http.content.HttpEntity;
 import com.hitachivantara.core.http.content.StringEntity;
 import com.hitachivantara.core.http.model.HttpForm;
 import com.hitachivantara.core.http.model.HttpHeader;
 import com.hitachivantara.core.http.model.HttpParameter;
 import com.hitachivantara.core.http.util.HttpUtils;
-import com.hitachivantara.core.http.util.SimpleHttpClient;
+import com.hitachivantara.core.http.util.HttpClientAgency;
 
 public class HCIAuth {
 
@@ -22,8 +22,8 @@ public class HCIAuth {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		ClientConfiguration configuration = new ClientConfiguration();
-		HttpClientBuilder builder = new DefaultHttpClientBuilder(configuration);
-		SimpleHttpClient client = new SimpleHttpClient(builder);
+		HttpClientBuilder builder = new SimpleHttpClientBuilder(configuration);
+		HttpClientAgency client = new HttpClientAgency(builder);
 
 		HttpForm form = new HttpForm();
 		HttpHeader header = null;

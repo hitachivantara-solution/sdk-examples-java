@@ -29,7 +29,7 @@ public class RestExample_GetObjectSummary {
 				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				// 获取当前对象的摘要信息
-				 HCPObjectSummary summary = hcpClient.getObjectSummary("example-hcp/moreThan100objs/file-1-0.txt");
+				 HCPObjectSummary summary = hcpClient.getObjectSummary("example-hcp/moreThan100objs/file-1-0.txct");
 
 				// 获取指定对象的摘要信息
 //				HCPObjectSummary summary = hcpClient.getObjectSummary(new CheckObjectRequest()
