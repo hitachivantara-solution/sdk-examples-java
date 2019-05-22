@@ -1,11 +1,30 @@
+/*                                                                             
+ * Copyright (C) 2019 Hitachi Vantara Inc.                                     
+ *                                                                             
+ * Licensed under the Apache License, Version 2.0 (the "License");           
+ * you may not use this file except in compliance with the License.            
+ * You may obtain a copy of the License at                                     
+ *                                                                             
+ *      http://www.apache.org/licenses/LICENSE-2.0                             
+ *                                                                             
+ * Unless required by applicable law or agreed to in writing, software         
+ * distributed under the License is distributed on an "AS IS" BASIS,         
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    
+ * See the License for the specific language governing permissions and         
+ * limitations under the License.                                              
+ */                                                                            
 package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.CountDownLatch;
 
 import com.hitachivantara.common.ex.HSCException;
 import com.hitachivantara.common.ex.ParseException;
 import com.hitachivantara.common.util.DigestUtils;
+import com.hitachivantara.common.util.RandomUtils;
 import com.hitachivantara.common.util.StreamUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.example.hcp.util.RandomInputStream;
@@ -27,78 +46,98 @@ import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
  */
 public class RestExample_Create2000RandomFiles {
 
-	public static void main(String[] args) throws IOException {
-		{
-			try {
-				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
+	public static void main(String[] args) throws IOException, InterruptedException {
+		final int maxi = 5;
+		final int maxj = 2000;
+		final CountDownLatch latch = new CountDownLatch(maxi * maxj);
+		final HCPNamespace hcpClient;
 
-				// Here is the folder path you want to store files.
-				final String directoryKey = "example-hcp/moreThan100objs/";
-
-				// 使用多线程（10个线程每个线程创建200个）创建100随机内容个文件
-				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-				for (int i = 0; i < 1; i++) {
-					final int id = i;
-
-					new Thread(new Runnable() {
-						final Long x = new Long(111030);
-						int c = 0;
-
-						@Override
-						public void run() {
-
-							for (int j = 0; j < 2000; j++) {
-								String key = directoryKey + "file-" + id + "-" + j + ".txt";
-								try {
-									// String content = new Date().toString() + " " + RandomInputStream.randomInt(10000, 99999);
-									String cid = "(" + id + "-" + j + ")";
-									String content = cid;// + (new Date().toString() + " " + RandomInputStream.randomInt(10000, 99999));
-
-									PutObjectResult result = hcpClient.putObject(new PutObjectRequest(key).withContent(content));
-
-									boolean exist = hcpClient.doesObjectExist(key);
-									System.out.println("Create file: " + key + " " + result.getETag() + " " + exist);
-									
-
-									HCPObject hcpobject = hcpClient.getObject(key);
-									String getContent = StreamUtils.inputStreamToString(hcpobject.getContent(), true);
-
-									// String cid = "(" + id + "-" + j + ")";
-									String ETag1 = hcpobject.getETag();
-									String ETag2 = DigestUtils.calcMD5ToHex(getContent);
-									String ETag3 = DigestUtils.calcMD5ToHex(cid);
-
-									long tid = Thread.currentThread().getId();
-									synchronized (x) {
-										if (ETag1.equalsIgnoreCase(ETag2) && ETag1.equalsIgnoreCase(ETag3)) {
-											System.out.println(tid + " " + key + "OK " + (++c));
-											// System.out.println(tid + key + "-> ETAG OK!<" + ETag1 + "><" + ETag2 + ">"+latch.getCount());
-										} else {
-											System.out.println(tid + " " + key + "NG " + (++c));
-											// System.out.println(tid + key + "-> ETAG NG!<" + ETag1 + "><" + ETag2 + ">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-										}
-									}
-
-								} catch (InvalidResponseException e) {
-									e.printStackTrace();
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						}
-					}).start();
-
-				}
-				// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-
-			} catch (InvalidResponseException e) {
-				e.printStackTrace();
-				return;
-			} catch (HSCException e) {
-				e.printStackTrace();
-				return;
-			}
+		try {
+			hcpClient = HCPClients.getInstance().getHCPClient();
+		} catch (InvalidResponseException e) {
+			e.printStackTrace();
+			return;
+		} catch (HSCException e) {
+			e.printStackTrace();
+			return;
 		}
+
+		// Here is the folder path you want to store files.
+		final String directoryKey = "example-hcp/moreThan100objs/";
+
+		// 使用多线程（10个线程每个线程创建200个）创建100随机内容个文件
+		// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+		for (int i = 0; i < maxi; i++) {
+			final int id = i;
+
+			new Thread(new Runnable() {
+				final Long x = new Long(111030);
+				int c = 0;
+
+				@Override
+				public void run() {
+					long tid = Thread.currentThread().getId();
+
+					for (int j = 0; j < maxj; j++) {
+						String key = directoryKey + "file-" + id + "-" + j + ".txt";
+						try {
+							String cid = "(" + id + "-" + j + ")";
+							String content = cid + (new Date().toString() + " " + RandomInputStream.randomInt(10000, 99999));
+
+							PutObjectResult result = hcpClient.putObject(new PutObjectRequest(key).withContent(content));
+
+							boolean exist = hcpClient.doesObjectExist(key);
+							System.out.println(tid + " " + key + " " + result.getETag() + " " + (exist ? "Created" : "Failed to create!!!!!"));
+
+							// 延时获取数据
+							Timer timer = new Timer();
+							timer.schedule(new TimerTask() {
+
+								@Override
+								public void run() {
+									HCPObject hcpobject;
+									String getContent;
+									try {
+										hcpobject = hcpClient.getObject(key);
+										getContent = StreamUtils.inputStreamToString(hcpobject.getContent(), true);
+
+										String ETag1 = hcpobject.getETag();
+										String ETag2 = DigestUtils.calcMD5ToHex(getContent);
+										String ETag3 = DigestUtils.calcMD5ToHex(content);
+
+										synchronized (x) {
+											if (ETag1.equalsIgnoreCase(ETag2) && ETag1.equalsIgnoreCase(ETag3)) {
+												// System.out.println(tid + " " + key + "Get OK " + (++c));
+												System.out.println(tid + key + "-> ETAG OK!<" + ETag1 + "><" + ETag2 + ">" + latch.getCount());
+											} else {
+												// System.out.println(tid + " " + key + "Get NG " + (++c));
+												System.out.println(tid + key + "-> ETAG NG!<" + ETag1 + "><" + ETag2 + ">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+											}
+										}
+
+									} catch (Exception e) {
+										e.printStackTrace();
+									} finally {
+										timer.cancel();
+										latch.countDown();
+									}
+								}
+							}, RandomUtils.randomInt(1, 10000));
+
+						} catch (InvalidResponseException e) {
+							e.printStackTrace();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}).start();
+		}
+		// =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+
+		latch.await();
+
+		System.out.println("Well done!");
 	}
 
 }

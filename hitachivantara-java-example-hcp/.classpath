@@ -15,10 +15,10 @@
 	<classpathentry kind="lib" path="lib/hcp/jackson-core-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.2.394.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.2.394.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/httpclient-4.5.5.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/httpcore-4.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-databind-2.9.5.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.2.410.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.2.410.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
