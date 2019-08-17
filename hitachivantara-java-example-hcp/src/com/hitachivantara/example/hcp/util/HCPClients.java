@@ -17,6 +17,7 @@ package com.hitachivantara.example.hcp.util;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.SignerFactory;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -125,7 +126,7 @@ public class HCPClients {
 		// Using HTTP protocol
 		clientConfig.setProtocol(com.amazonaws.Protocol.HTTP);
 		clientConfig.setSignerOverride("S3SignerType");
-
+		
 		AmazonS3 hs3Client = AmazonS3ClientBuilder.standard()
 				.withClientConfiguration(clientConfig)
 				.withEndpointConfiguration(new EndpointConfiguration(endpoint, ""))

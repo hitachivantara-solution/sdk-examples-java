@@ -19,20 +19,20 @@ import java.io.File;
 
 public class Account {
 	// ------------------------------------------------------------------------------------------------------
-	// public final static String hcpdomain = "hcp-demo.hcpdemo.com";
-	// public final static String tenant = "tenant1";
-	// public final static String endpoint = "tenant1.hcp-demo.hcpdemo.com";
-	// public final static String namespace = "test1";
+//	 public final static String hcpdomain = "hcp-demo.hcpdemo.com";
+//	 public final static String tenant = "tenant1";
+//	 public final static String endpoint = "tenant1.hcp-demo.hcpdemo.com";
+//	 public final static String namespace = "test";
 	// ------------------------------------------------------------------------------------------------------
 //	 public final static String hcpdomain = "hcpvm.bjlab.poc";
 //	 public final static String tenant = "tn1";
 //	 public final static String endpoint = "tn1.hcpvm.bjlab.poc"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
 //	 public final static String namespace = "test";
 	// ------------------------------------------------------------------------------------------------------
-	public final static String hcpdomain = "hcp8.hdim.lab";
-	public final static String tenant = "tn9";
-	public final static String endpoint = "tn9.hcp8.hdim.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-	public final static String namespace = "cloud";
+	public final static String hcpdomain = "hcp.changhongx.com";
+	public final static String tenant = "tenant1";
+	public final static String endpoint = "tenant1.hcp.changhongx.com"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
+	public final static String namespace = "ns2";
 	// ------------------------------------------------------------------------------------------------------
 	// The access key (user1) encoded by Base64
 	public final static String accessKey = "YWRtaW4=";

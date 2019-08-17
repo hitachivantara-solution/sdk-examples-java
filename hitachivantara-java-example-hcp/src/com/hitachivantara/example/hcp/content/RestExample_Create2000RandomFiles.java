@@ -86,43 +86,43 @@ public class RestExample_Create2000RandomFiles {
 
 							PutObjectResult result = hcpClient.putObject(new PutObjectRequest(key).withContent(content));
 
-							boolean exist = hcpClient.doesObjectExist(key);
-							System.out.println(tid + " " + key + " " + result.getETag() + " " + (exist ? "Created" : "Failed to create!!!!!"));
-
-							// 延时获取数据
-							Timer timer = new Timer();
-							timer.schedule(new TimerTask() {
-
-								@Override
-								public void run() {
-									HCPObject hcpobject;
-									String getContent;
-									try {
-										hcpobject = hcpClient.getObject(key);
-										getContent = StreamUtils.inputStreamToString(hcpobject.getContent(), true);
-
-										String ETag1 = hcpobject.getETag();
-										String ETag2 = DigestUtils.calcMD5ToHex(getContent);
-										String ETag3 = DigestUtils.calcMD5ToHex(content);
-
-										synchronized (x) {
-											if (ETag1.equalsIgnoreCase(ETag2) && ETag1.equalsIgnoreCase(ETag3)) {
-												// System.out.println(tid + " " + key + "Get OK " + (++c));
-												System.out.println(tid + key + "-> ETAG OK!<" + ETag1 + "><" + ETag2 + ">" + latch.getCount());
-											} else {
-												// System.out.println(tid + " " + key + "Get NG " + (++c));
-												System.out.println(tid + key + "-> ETAG NG!<" + ETag1 + "><" + ETag2 + ">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-											}
-										}
-
-									} catch (Exception e) {
-										e.printStackTrace();
-									} finally {
-										timer.cancel();
-										latch.countDown();
-									}
-								}
-							}, RandomUtils.randomInt(1, 10000));
+//							boolean exist = hcpClient.doesObjectExist(key);
+//							System.out.println(tid + " " + key + " " + result.getETag() + " " + (exist ? "Created" : "Failed to create!!!!!"));
+//
+//							// 延时获取数据
+//							Timer timer = new Timer();
+//							timer.schedule(new TimerTask() {
+//
+//								@Override
+//								public void run() {
+//									HCPObject hcpobject;
+//									String getContent;
+//									try {
+//										hcpobject = hcpClient.getObject(key);
+//										getContent = StreamUtils.inputStreamToString(hcpobject.getContent(), true);
+//
+//										String ETag1 = hcpobject.getETag();
+//										String ETag2 = DigestUtils.calcMD5ToHex(getContent);
+//										String ETag3 = DigestUtils.calcMD5ToHex(content);
+//
+//										synchronized (x) {
+//											if (ETag1.equalsIgnoreCase(ETag2) && ETag1.equalsIgnoreCase(ETag3)) {
+//												// System.out.println(tid + " " + key + "Get OK " + (++c));
+//												System.out.println(tid + key + "-> ETAG OK!<" + ETag1 + "><" + ETag2 + ">" + latch.getCount());
+//											} else {
+//												// System.out.println(tid + " " + key + "Get NG " + (++c));
+//												System.out.println(tid + key + "-> ETAG NG!<" + ETag1 + "><" + ETag2 + ">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//											}
+//										}
+//
+//									} catch (Exception e) {
+//										e.printStackTrace();
+//									} finally {
+//										timer.cancel();
+//										latch.countDown();
+//									}
+//								}
+//							}, RandomUtils.randomInt(1, 10000));
 
 						} catch (InvalidResponseException e) {
 							e.printStackTrace();

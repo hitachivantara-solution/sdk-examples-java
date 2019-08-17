@@ -33,6 +33,7 @@ import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -67,7 +68,8 @@ public class S3Example_PutGetDeleteObject {
 			// Using HTTP protocol
 			clientConfig.setProtocol(Protocol.HTTP);
 			clientConfig.setSignerOverride("S3SignerType");
-
+//			clientConfig.setMaxConnections(maxConnections);
+			
 			hs3Client = AmazonS3ClientBuilder.standard()
 					.withClientConfiguration(clientConfig)
 					.withEndpointConfiguration(new EndpointConfiguration(endpoint, ""))
@@ -118,6 +120,7 @@ public class S3Example_PutGetDeleteObject {
 		// ↑↑↑=*=*=* CODE JUST FOR DEMONSTRATE, UNNECESSARY IN PRODUCTION ENVIRONMENT *=*=*=↑↑↑
 
 		{
+			hs3Client.deleteObjects(new DeleteObjectsRequest(bucketName).withKeys("111","222"));
 			// Delete object in HCP.
 			hs3Client.deleteObject(bucketName, key);
 			
