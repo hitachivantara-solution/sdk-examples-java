@@ -90,14 +90,14 @@ public class HCPClients {
 
 	public HCPNamespace newHCPClient(String endpoint, String namespace, String accessKey, String secretKey) throws HSCException {
 		ClientConfiguration clientConfig = new ClientConfiguration();
-		clientConfig.setConnectTimeout(2000);
+//		clientConfig.setConnectTimeout(2000);
 		// Using HTTP protocol
 		clientConfig.setProtocol(com.hitachivantara.core.http.Protocol.HTTP);
-		clientConfig.setDefaultMaxConnectionsPerRoute(20);
-		clientConfig.setMaxConnections(20);
+//		clientConfig.setDefaultMaxConnectionsPerRoute(20);
+//		clientConfig.setMaxConnections(20);
 		
-		// myClientConfig.setProxy("10.129.215.166", 9090);
-		// myClientConfig.setProxyUsername(proxyUsername);
+//		clientConfig.setProxy("localhost", 8080);
+		// clientConfig.setProxyUsername(proxyUsername);
 
 //		 InMemoryDnsResolver dnsResolver = new InMemoryDnsResolver();
 //		 dnsResolver.setUnsolvableException(true);
@@ -125,7 +125,11 @@ public class HCPClients {
 		com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
 		// Using HTTP protocol
 		clientConfig.setProtocol(com.amazonaws.Protocol.HTTP);
+//		clientConfig.setSignerOverride("AWS4SignerType");
 		clientConfig.setSignerOverride("S3SignerType");
+		
+//		clientConfig.setProxyHost("localhost");
+//		clientConfig.setProxyPort(8080);
 		
 		AmazonS3 hs3Client = AmazonS3ClientBuilder.standard()
 				.withClientConfiguration(clientConfig)

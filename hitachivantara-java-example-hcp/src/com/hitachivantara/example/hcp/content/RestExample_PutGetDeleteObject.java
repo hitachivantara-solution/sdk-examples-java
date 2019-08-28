@@ -65,6 +65,7 @@ public class RestExample_PutGetDeleteObject {
 			ClientConfiguration clientConfig = new ClientConfiguration();
 			// Using HTTP protocol
 			clientConfig.setProtocol(Protocol.HTTP);
+//			clientConfig.setProxy("localhost", 8080);
 
 			HCPNamespaceClientBuilder builder = HCPClientBuilder.defaultHCPClient();
 			hcpClient = builder.withClientConfiguration(clientConfig)

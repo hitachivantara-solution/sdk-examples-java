@@ -17,6 +17,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.http.entity.ContentType;
 
 import com.hitachivantara.common.ex.HSCException;
+import com.hitachivantara.common.util.DateUtils;
 import com.hitachivantara.common.util.DigestUtils;
 import com.hitachivantara.example.hcp.util.Account;
 import com.hitachivantara.example.hcp.util.HCPClients;
@@ -35,13 +36,18 @@ import com.hitachivantara.hcp.standard.model.request.impl.MultipartUploadRequest
  */
 public class RestExample_HCPMultipartUpload {
 	public static void main(String[] args) throws IOException, HSCException, NoSuchAlgorithmException {
-		HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
+		//！！！！！！！！！时间偏移--测试用！！！！！！！！！！
+		DateUtils.setTimeOffset(-43193*1000);
 
+		HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 		// 测试用大文件（**分片上传文件应为大文件至少500MB以上，小文件不建议使用分片方式上传**）
-		final File file = new File("c:\\temp\\anyconnect-win-4.7.01076-predeploy-k9.zip");
+		final File file = new File("D:\\Downloads\\Soft\\anyconnect-win-4.7.01076-predeploy-k9.zip");
 		// 上传key
-		final String key = "hcp-test/" + file.getName();
-		// 桶名称
+		final String key = "hcp-test1/" + file.getName();
+
+		if(hcpClient.doesObjectExist(key)) {
+			hcpClient.deleteObject(key);
+		}
 
 		String uploadId = null;
 		// 获得分片上传实例

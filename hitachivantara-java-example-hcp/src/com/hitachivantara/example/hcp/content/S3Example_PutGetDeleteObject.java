@@ -67,9 +67,12 @@ public class S3Example_PutGetDeleteObject {
 			com.amazonaws.ClientConfiguration clientConfig = new com.amazonaws.ClientConfiguration();
 			// Using HTTP protocol
 			clientConfig.setProtocol(Protocol.HTTP);
+//			clientConfig.setSignerOverride("AWS4SignerType");
 			clientConfig.setSignerOverride("S3SignerType");
-//			clientConfig.setMaxConnections(maxConnections);
-			
+
+			//			clientConfig.setProxyHost("localhost");
+//			clientConfig.setProxyPort(8080);
+
 			hs3Client = AmazonS3ClientBuilder.standard()
 					.withClientConfiguration(clientConfig)
 					.withEndpointConfiguration(new EndpointConfiguration(endpoint, ""))

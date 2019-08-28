@@ -22,7 +22,7 @@ public class Account {
 //	 public final static String hcpdomain = "hcp-demo.hcpdemo.com";
 //	 public final static String tenant = "tenant1";
 //	 public final static String endpoint = "tenant1.hcp-demo.hcpdemo.com";
-//	 public final static String namespace = "test";
+//	 public final static String namespace = "ns1";
 	// ------------------------------------------------------------------------------------------------------
 //	 public final static String hcpdomain = "hcpvm.bjlab.poc";
 //	 public final static String tenant = "tn1";

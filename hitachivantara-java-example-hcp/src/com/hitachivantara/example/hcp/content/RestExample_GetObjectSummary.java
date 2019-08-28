@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import com.hitachivantara.common.ex.HSCException;
-import com.hitachivantara.common.util.DateUtils;
+import com.hitachivantara.common.util.DatetimeFormat;
 import com.hitachivantara.common.util.FormatUtils;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
@@ -94,7 +94,7 @@ public class RestExample_GetObjectSummary {
 					System.out.println("Is folder.");
 				} else if (summary.isObject()) {
 					System.out.println("Size = " + FormatUtils.getPrintSize(summary.getSize()));
-					System.out.println("IngestTime = " + DateUtils.ISO8601_DATE_FORMAT.format(new Date(summary.getIngestTime())));
+					System.out.println("IngestTime = " + DatetimeFormat.ISO8601_DATE_FORMAT.format(new Date(summary.getIngestTime())));
 				}
 
 			} catch (InvalidResponseException e) {

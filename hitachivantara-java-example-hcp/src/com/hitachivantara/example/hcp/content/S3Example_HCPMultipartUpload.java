@@ -45,12 +45,20 @@ public class S3Example_HCPMultipartUpload {
 		final int PART_SIZE = 10 * 1024 * 1024; // Set part size to 10 MB.
 
 		// 测试用大文件（**分片上传文件应为大文件至少500MB以上，小文件不建议使用分片方式上传**）
-		final File tobeUploadFile = new File("C:\\VDisk\\DriverD\\Downloads\\Libs\\tika-app-1.7.jar");
+//		final File tobeUploadFile = new File("C:\\VDisk\\DriverD\\Downloads\\Libs\\tika-app-1.7.jar");
+//		// 上传key
+//		final String objectPath = "hcp-test/" + tobeUploadFile.getName() + "6";
+		
+		final File tobeUploadFile = new File("D:\\Downloads\\Soft\\anyconnect-win-4.7.01076-predeploy-k9.zip");
 		// 上传key
-		final String objectPath = "hcp-test/" + tobeUploadFile.getName() + "6";
+		final String objectPath = "hcp-test/" + tobeUploadFile.getName();
+
 		// 桶名称
 		final String bucketName = Account.namespace;
 
+		if(s3Client.doesObjectExist(bucketName, objectPath)) {
+			s3Client.deleteObject(bucketName, objectPath);
+		}
 		// ==========================================================================================================================
 		MulitipartUploaderExecutor exec = new MulitipartUploaderExecutor(s3Client, bucketName, objectPath, tobeUploadFile, PART_SIZE);
 		// 开始上传（这里使用10个线程上传,文件被分为10片）

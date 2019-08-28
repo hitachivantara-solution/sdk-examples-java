@@ -67,7 +67,6 @@ public class S3Example_xxx {
 			// Using HTTP protocol
 			clientConfig.setProtocol(Protocol.HTTP);
 			clientConfig.setSignerOverride("S3SignerType");
-//			clientConfig.setMaxConnections(maxConnections);
 
 			hs3Client = AmazonS3ClientBuilder.standard()
 					.withClientConfiguration(clientConfig)

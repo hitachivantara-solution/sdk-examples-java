@@ -20,14 +20,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.hitachivantara.common.ex.HSCException;
-import com.hitachivantara.common.util.DateUtils;
+import com.hitachivantara.common.util.DatetimeFormat;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.api.ObjectEntryIterator;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntry;
 import com.hitachivantara.hcp.standard.model.HCPObjectEntrys;
-import com.hitachivantara.hcp.standard.model.request.impl.ListDirectoryRequest;
 
 /**
  * 列出当前目录下所有对象的示例
@@ -79,7 +78,7 @@ public class RestExample_ListDirectory {
 								+ "\t"
 								+ obj.getType()
 								+ "\t"
-								+ DateUtils.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
+								+ DatetimeFormat.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
 								+ "\t"
 								+ obj.getContentHash());
 						}

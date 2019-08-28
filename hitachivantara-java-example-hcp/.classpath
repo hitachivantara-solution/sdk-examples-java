@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="lib/s3/ion-java-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/s3/jmespath-java-1.11.356.jar"/>
 	<classpathentry kind="lib" path="lib/s3/joda-time-2.8.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="lib/hcp/jaxen-1.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-annotations-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-core-2.9.5.jar"/>
@@ -18,7 +17,8 @@
 	<classpathentry kind="lib" path="lib/hcp/httpclient-4.5.5.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/httpcore-4.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-databind-2.9.5.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.2.410.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.2.410.jar"/>
+	<classpathentry kind="lib" path="lib/test/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.2.426.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.2.426.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

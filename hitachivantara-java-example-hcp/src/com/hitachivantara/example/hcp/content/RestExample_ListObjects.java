@@ -16,20 +16,16 @@
 package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 
 import com.hitachivantara.common.ex.HSCException;
-import com.hitachivantara.common.util.DateUtils;
-import com.hitachivantara.common.util.StreamUtils;
+import com.hitachivantara.common.util.DatetimeFormat;
 import com.hitachivantara.example.hcp.util.HCPClients;
 import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.api.event.ListObjectHandler;
 import com.hitachivantara.hcp.standard.define.NextAction;
 import com.hitachivantara.hcp.standard.model.HCPObjectSummary;
-import com.hitachivantara.hcp.standard.model.metadata.Annotation;
-import com.hitachivantara.hcp.standard.model.metadata.HCPMetadata;
 import com.hitachivantara.hcp.standard.model.request.impl.ListObjectRequest;
 
 /**
@@ -82,7 +78,7 @@ public class RestExample_ListObjects {
 								+ "\t"
 								+ obj.getType()
 								+ "\t"
-								+ DateUtils.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
+								+ DatetimeFormat.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
 								+ "\t"
 								+ obj.getContentHash());
 

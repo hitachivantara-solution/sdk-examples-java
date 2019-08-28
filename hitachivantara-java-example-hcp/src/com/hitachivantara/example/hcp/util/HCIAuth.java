@@ -25,8 +25,8 @@ import com.hitachivantara.core.http.content.StringEntity;
 import com.hitachivantara.core.http.model.HttpForm;
 import com.hitachivantara.core.http.model.HttpHeader;
 import com.hitachivantara.core.http.model.HttpParameter;
-import com.hitachivantara.core.http.util.HttpUtils;
 import com.hitachivantara.core.http.util.HttpClientAgency;
+import com.hitachivantara.core.http.util.HttpUtils;
 
 public class HCIAuth {
 
