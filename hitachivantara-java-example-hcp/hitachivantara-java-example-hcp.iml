@@ -20,5 +20,8 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="s3-lib" level="project" />
+    <orderEntry type="library" name="hcp-lib" level="project" />
+    <orderEntry type="library" name="test-lib" level="project" />
   </component>
 </module>
