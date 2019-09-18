@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/hcp/dom4j-2.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/s3/aws-java-sdk-core-1.11.356.jar" sourcepath="C:/Users/sohan/.m2/repository/com/amazonaws/aws-java-sdk-core/1.11.356/aws-java-sdk-core-1.11.356-sources.jar"/>
 	<classpathentry kind="lib" path="lib/s3/aws-java-sdk-kms-1.11.356.jar"/>
 	<classpathentry kind="lib" path="lib/s3/aws-java-sdk-s3-1.11.356.jar" sourcepath="C:/Users/sohan/.m2/repository/com/amazonaws/aws-java-sdk-s3/1.11.356/aws-java-sdk-s3-1.11.356-sources.jar"/>
@@ -18,7 +17,8 @@
 	<classpathentry kind="lib" path="lib/hcp/httpcore-4.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/hcp/jackson-databind-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/test/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.2.426.jar"/>
-	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.2.426.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-core-0.2.428.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/hitachivantara-java-sdk-hcp-0.2.428.jar"/>
+	<classpathentry kind="lib" path="lib/hcp/dom4j-2.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

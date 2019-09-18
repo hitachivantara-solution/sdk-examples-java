@@ -62,7 +62,7 @@ public class RestExample_HCPMultipartDownload {
 
 		HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
-		CountDownLatch latch = new CountDownLatch(2);
+		final CountDownLatch latch = new CountDownLatch(2);
 		// PREPARE TEST DATA ----------------------------------------------------------------------
 
 		// EXEC TEST FUNCTION ---------------------------------------------------------------------

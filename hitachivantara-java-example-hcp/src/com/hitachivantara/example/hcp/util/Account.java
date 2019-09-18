@@ -32,7 +32,7 @@ public class Account {
 	public final static String hcpdomain = "hcp.changhongx.com";
 	public final static String tenant = "tenant1";
 	public final static String endpoint = "tenant1.hcp.changhongx.com"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-	public final static String namespace = "ns2";
+	public final static String namespace = "ns1";
 	// ------------------------------------------------------------------------------------------------------
 	// The access key (user1) encoded by Base64
 	public final static String accessKey = "YWRtaW4=";

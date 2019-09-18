@@ -83,7 +83,7 @@ public class RestExample_HCPMultipartUpload {
 		}
 		final int partsSize = parts.size();
 
-		CountDownLatch latch = new CountDownLatch(partsSize);
+		final CountDownLatch latch = new CountDownLatch(partsSize);
 
 		for (int i = 0; i < partsSize; i++) {
 			final int id = i;

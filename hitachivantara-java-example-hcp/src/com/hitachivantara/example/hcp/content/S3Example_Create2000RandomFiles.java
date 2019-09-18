@@ -45,7 +45,7 @@ public class S3Example_Create2000RandomFiles {
 
 	public static void main(String[] args) throws IOException {
 		{
-			AmazonS3 hcpClient = HCPClients.getInstance().getS3Client();
+			final AmazonS3 hcpClient = HCPClients.getInstance().getS3Client();
 
 			// Here is the folder path you want to store files.
 			final String directoryKey = "example-hcp/moreThan100objs/";

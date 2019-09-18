@@ -86,8 +86,8 @@ public class RestExample_Create2000RandomFiles {
 
 							PutObjectResult result = hcpClient.putObject(new PutObjectRequest(key).withContent(content));
 
-//							boolean exist = hcpClient.doesObjectExist(key);
-//							System.out.println(tid + " " + key + " " + result.getETag() + " " + (exist ? "Created" : "Failed to create!!!!!"));
+							boolean exist = hcpClient.doesObjectExist(key);
+							System.out.println(tid + " " + key + " " + result.getETag() + " " + (exist ? "Created" : "Failed to create!!!!!"));
 //
 //							// 延时获取数据
 //							Timer timer = new Timer();

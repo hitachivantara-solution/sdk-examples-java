@@ -42,7 +42,7 @@ public class RestExample_ListAllMetadataFromFolder {
 	public static void main(String[] args) throws IOException {
 		{
 			try {
-				HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
+				final HCPNamespace hcpClient = HCPClients.getInstance().getHCPClient();
 
 				// 需要列出的目录名
 				// Here is the folder path you want to list.
@@ -74,7 +74,7 @@ public class RestExample_ListAllMetadataFromFolder {
 						if (metas != null) {
 							System.out.println("\n-------------------------------------------------------------------------------");
 							System.out.println("Key=" + objectSummary.getKey());
-							for (Annotation meta : metas) {
+							for (final Annotation meta : metas) {
 								
 								hcpClient.getMetadata(objectSummary.getKey(), meta.getName(), new MetadataParser<String>() {
 
