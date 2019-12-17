@@ -1,0 +1,42 @@
+执行以下两个命令添加hcp sdk至Mave库
+mvn install:install-file -Dfile=E:\Release-Library\hitachivantara-java-sdk\hitachivantara-java-sdk-core-0.2.437.jar -DgroupId=hitachivantara -DartifactId=hitachivantara-java-sdk-core -Dversion=0.2.437 -Dpackaging=jar
+mvn install:install-file -Dfile=E:\Release-Library\hitachivantara-java-sdk\hitachivantara-java-sdk-hcp-0.2.437.jar -DgroupId=hitachivantara -DartifactId=hitachivantara-java-sdk-hcp -Dversion=0.2.437 -Dpackaging=jar
+
+#Maven hcp sdk 引入配置
+<dependency>
+	<groupId>hitachivantara</groupId>
+	<artifactId>hitachivantara-java-sdk-core</artifactId>
+	<version>0.2.437</version>
+</dependency>
+<dependency>
+	<groupId>hitachivantara</groupId>
+	<artifactId>hitachivantara-java-sdk-hcp</artifactId>
+	<version>0.2.437</version>
+</dependency>
+
+#maven其他关联包配置
+<dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpclient</artifactId>
+	<version>4.5.10</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-core</artifactId>
+	<version>2.9.5</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-annotations</artifactId>
+	<version>2.9.5</version>
+</dependency>
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.9.5</version>
+</dependency>
+<dependency>
+    <groupId>org.dom4j</groupId>
+    <artifactId>dom4j</artifactId>
+    <version>2.0.2</version>
+</dependency>

@@ -24,15 +24,15 @@ public class Account {
 //	 public final static String endpoint = "tenant1.hcp-demo.hcpdemo.com";
 //	 public final static String namespace = "ns1";
 	// ------------------------------------------------------------------------------------------------------
-//	 public final static String hcpdomain = "hcpvm.bjlab.poc";
-//	 public final static String tenant = "tn1";
-//	 public final static String endpoint = "tn1.hcpvm.bjlab.poc"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-//	 public final static String namespace = "test";
+	 public final static String hcpdomain = "hcp1.hitachi.lab";
+	 public final static String tenant = "tenanta";
+	 public final static String endpoint = "tenanta.hcp1.hitachi.lab"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
+	 public final static String namespace = "ns1";
 	// ------------------------------------------------------------------------------------------------------
-	public final static String hcpdomain = "hcp.changhongx.com";
-	public final static String tenant = "tenant1";
-	public final static String endpoint = "tenant1.hcp.changhongx.com"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
-	public final static String namespace = "ns1";
+//	public final static String hcpdomain = "hcp.changhongx.com";
+//	public final static String tenant = "tenant1";
+//	public final static String endpoint = "tenant1.hcp.changhongx.com"; // "tenant1.hcp-demo.hcpdemo.com";// "tn9.hcp8.hdim.lab"; //
+//	public final static String namespace = "ns2";
 	// ------------------------------------------------------------------------------------------------------
 	// The access key (user1) encoded by Base64
 	public final static String accessKey = "YWRtaW4=";
@@ -45,5 +45,6 @@ public class Account {
 	public final static String HCP_AUTHORIZATION = "HCP " + accessKey + ":" + secretKey;
 	// ------------------------------------------------------------------------------------------------------
 	public static final File localFile1 = new File("C:\\VDisk\\DriverD\\Downloads\\Temp\\WeChat Image_20180716111626.doc");
+//	public static final File localFile1 = new File("C:\\VDisk\\DriverD\\Downloads\\Pic\\10.jpg");
 	// ------------------------------------------------------------------------------------------------------
 }

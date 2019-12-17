@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    
  * See the License for the specific language governing permissions and         
  * limitations under the License.                                              
- */                                                                            
+ */
 package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
@@ -25,6 +25,7 @@ import com.hitachivantara.hcp.common.ex.InvalidResponseException;
 import com.hitachivantara.hcp.standard.api.HCPNamespace;
 import com.hitachivantara.hcp.standard.api.event.ListObjectHandler;
 import com.hitachivantara.hcp.standard.define.NextAction;
+import com.hitachivantara.hcp.standard.define.ObjectType;
 import com.hitachivantara.hcp.standard.model.HCPObjectSummary;
 import com.hitachivantara.hcp.standard.model.request.impl.ListObjectRequest;
 
@@ -53,51 +54,56 @@ public class RestExample_ListObjects {
 				ListObjectRequest request = new ListObjectRequest(directoryKey)
 						// 指定需要遍历此目录
 						.withRecursiveDirectory(true)
-						// 可以通过设置Filter过滤对象
-//						.withObjectFilter(new ObjectFilter() {
-//
-//							@Override
-//							public boolean accept(HCPObjectEntry arg0) {
-//								//只有对象名称包含字母X的才被foundObject
-//								return arg0.getName().contains("X");
-//							}
-//						})
-						;
-				
+				// 可以通过设置Filter过滤对象
+				// .withObjectFilter(new ObjectFilter() {
+				//
+				// @Override
+				// public boolean accept(HCPObjectEntry arg0) {
+				// //只有对象名称包含字母X的才被foundObject
+				// return arg0.getName().contains("X");
+				// }
+				// })
+				;
+
 				hcpClient.listObjects(request, new ListObjectHandler() {
-					 int i = 0;
+					int i = 0;
 
 					// 发现的对象信息
 					@Override
 					public NextAction foundObject(HCPObjectSummary obj) throws HSCException {
-						System.out.println(++i
-								+ "\t"
-								+ obj.getSize()
-								+ "\t"
-								+ obj.getKey()
-								+ "\t"
-								+ obj.getType()
-								+ "\t"
-								+ DatetimeFormat.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
-								+ "\t"
-								+ obj.getContentHash());
+						if (obj.isDirectory()) {
+							System.out.println(
+									++i + "\t \t" + obj.getType() + "\t" + DatetimeFormat.ISO8601_DATE_FORMAT.format(new Date(obj.getChangeTime())) + "\t" + obj.getKey());
+						} else {
+							System.out.println(++i
+									+ "\t"
+									+ obj.getSize()
+									+ "\t"
+									+ obj.getType()
+									+ "\t\t"
+									+ DatetimeFormat.ISO8601_DATE_FORMAT.format(new Date(obj.getIngestTime()))
+									+ "\t"
+									+ obj.getKey()
+									+ "\t"
+									+ obj.getContentHash());
+						}
 
 						// 做一些事情，例如打印文件内容
 						// You can do something more...
-//						try {
-//							InputStream content = hcpClient.getObject(obj.getKey()).getContent();
-//							System.out.print("Content:");
-//							StreamUtils.inputStreamToConsole(content, true);
-//							System.out.println();
-//						} catch (IOException e) {
-//						}
+						// try {
+						// InputStream content = hcpClient.getObject(obj.getKey()).getContent();
+						// System.out.print("Content:");
+						// StreamUtils.inputStreamToConsole(content, true);
+						// System.out.println();
+						// } catch (IOException e) {
+						// }
 
 						// 如需要可以停止列出目录
 						// You can add specific conditions to stop the listing action
-//						if (i == 88) {
-//							return NextAction.stop;
-//						}
-						 
+						// if (i == 88) {
+						// return NextAction.stop;
+						// }
+
 						return null;
 					}
 				});

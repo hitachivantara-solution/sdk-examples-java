@@ -59,6 +59,7 @@ public class S3Example_PutMetadata {
 				// Get metadata from HCP
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				ObjectMetadata metadataFromHCP = hs3Client.getObjectMetadata(bucketName, key);
+//				metadataFromHCP.getUserMetadata();
 				//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 				Map<String, String> map = metadataFromHCP.getUserMetadata();
 				// Verify contents.

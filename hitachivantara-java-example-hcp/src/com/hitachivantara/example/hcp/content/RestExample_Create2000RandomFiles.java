@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    
  * See the License for the specific language governing permissions and         
  * limitations under the License.                                              
- */                                                                            
+ */
 package com.hitachivantara.example.hcp.content;
 
 import java.io.IOException;
@@ -47,8 +47,8 @@ import com.hitachivantara.hcp.standard.model.request.impl.PutObjectRequest;
 public class RestExample_Create2000RandomFiles {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		final int maxi = 5;
-		final int maxj = 2000;
+		final int maxi = 1000;
+		final int maxj = 100;
 		final CountDownLatch latch = new CountDownLatch(maxi * maxj);
 		final HCPNamespace hcpClient;
 
@@ -82,47 +82,67 @@ public class RestExample_Create2000RandomFiles {
 						String key = directoryKey + "file-" + id + "-" + j + ".txt";
 						try {
 							String cid = "(" + id + "-" + j + ")";
-							String content = cid + (new Date().toString() + " " + RandomInputStream.randomInt(10000, 99999));
+							// String content = cid + (new Date().toString() + " " + RandomInputStream.randomInt(10000, 99999));
+							String content = cid + (new Date().toString() + " " + RandomUtils.randomString(RandomUtils.randomInt(1024, 10240)));
 
 							PutObjectResult result = hcpClient.putObject(new PutObjectRequest(key).withContent(content));
 
 							boolean exist = hcpClient.doesObjectExist(key);
-							System.out.println(tid + " " + key + " " + result.getETag() + " " + (exist ? "Created" : "Failed to create!!!!!"));
-//
-//							// 延时获取数据
-//							Timer timer = new Timer();
-//							timer.schedule(new TimerTask() {
-//
-//								@Override
-//								public void run() {
-//									HCPObject hcpobject;
-//									String getContent;
-//									try {
-//										hcpobject = hcpClient.getObject(key);
-//										getContent = StreamUtils.inputStreamToString(hcpobject.getContent(), true);
-//
-//										String ETag1 = hcpobject.getETag();
-//										String ETag2 = DigestUtils.calcMD5ToHex(getContent);
-//										String ETag3 = DigestUtils.calcMD5ToHex(content);
-//
-//										synchronized (x) {
-//											if (ETag1.equalsIgnoreCase(ETag2) && ETag1.equalsIgnoreCase(ETag3)) {
-//												// System.out.println(tid + " " + key + "Get OK " + (++c));
-//												System.out.println(tid + key + "-> ETAG OK!<" + ETag1 + "><" + ETag2 + ">" + latch.getCount());
-//											} else {
-//												// System.out.println(tid + " " + key + "Get NG " + (++c));
-//												System.out.println(tid + key + "-> ETAG NG!<" + ETag1 + "><" + ETag2 + ">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//											}
-//										}
-//
-//									} catch (Exception e) {
-//										e.printStackTrace();
-//									} finally {
-//										timer.cancel();
-//										latch.countDown();
-//									}
-//								}
-//							}, RandomUtils.randomInt(1, 10000));
+
+							String contentOnHCP = hcpClient.getObject(key, new ObjectParser<String>() {
+
+								@Override
+								public String parse(HCPObject object) throws ParseException {
+									try {
+										return StreamUtils.inputStreamToString(object.getContent(), true);
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									return null;
+								}
+							});
+
+							System.out.println(tid + " " + key + " " + result.getETag() + " " + ((exist && content.equals(contentOnHCP)) ? "Created" : "Failed to create!!!!!"));
+							// if (!exist || !content.equals(contentOnHCP)) {
+							// System.out.println(tid + " " + key + " " + result.getETag() + " Failed to create!!!!!");
+							// }
+							latch.countDown();
+							//
+							// // 延时获取数据
+							// Timer timer = new Timer();
+							// timer.schedule(new TimerTask() {
+							//
+							// @Override
+							// public void run() {
+							// HCPObject hcpobject;
+							// String getContent;
+							// try {
+							// hcpobject = hcpClient.getObject(key);
+							// getContent = StreamUtils.inputStreamToString(hcpobject.getContent(), true);
+							//
+							// String ETag1 = hcpobject.getETag();
+							// String ETag2 = DigestUtils.calcMD5ToHex(getContent);
+							// String ETag3 = DigestUtils.calcMD5ToHex(content);
+							//
+							// synchronized (x) {
+							// if (ETag1.equalsIgnoreCase(ETag2) && ETag1.equalsIgnoreCase(ETag3)) {
+							// // System.out.println(tid + " " + key + "Get OK " + (++c));
+							// System.out.println(tid + key + "-> ETAG OK!<" + ETag1 + "><" + ETag2 + ">" + latch.getCount());
+							// } else {
+							// // System.out.println(tid + " " + key + "Get NG " + (++c));
+							// System.out.println(tid + key + "-> ETAG NG!<" + ETag1 + "><" + ETag2 + ">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+							// }
+							// }
+							//
+							// } catch (Exception e) {
+							// e.printStackTrace();
+							// } finally {
+							// timer.cancel();
+							// latch.countDown();
+							// }
+							// }
+							// }, RandomUtils.randomInt(1, 10000));
 
 						} catch (InvalidResponseException e) {
 							e.printStackTrace();

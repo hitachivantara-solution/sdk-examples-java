@@ -130,6 +130,7 @@ public class HCPClients {
 		
 //		clientConfig.setProxyHost("localhost");
 //		clientConfig.setProxyPort(8080);
+//		clientConfig.setMaxConnections(maxConnections);
 		
 		AmazonS3 hs3Client = AmazonS3ClientBuilder.standard()
 				.withClientConfiguration(clientConfig)

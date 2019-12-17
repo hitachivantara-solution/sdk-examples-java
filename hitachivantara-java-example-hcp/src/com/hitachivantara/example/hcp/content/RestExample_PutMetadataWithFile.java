@@ -46,7 +46,7 @@ import com.hitachivantara.hcp.standard.util.MetadataUtils;
  * @author sohan
  *
  */
-public class RestExample_PutMetadata2 {
+public class RestExample_PutMetadataWithFile {
 
 	public static void main(String[] args) throws IOException {
 		// Here is the file will be uploaded into HCP

@@ -44,14 +44,15 @@ import com.hitachivantara.hcp.standard.util.MetadataUtils;
  * @author sohan
  *
  */
-public class RestExample_PutMetadata1 {
+public class RestExample_PutMetadata {
 
 	public static void main(String[] args) throws IOException {
 		// Here is the file will be uploaded into HCP
 		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = "example-hcp/subfolder1/" + file.getName();
-		
+//		String key = "example-hcp/subfolder1/" + file.getName()+"2";
+		String key = "example-hcp/subfolder1/testFile4EncodingMeta_UTF8.txt";
+
 		// Create a file for below metadata operation.
 		{
 			try {
@@ -69,6 +70,8 @@ public class RestExample_PutMetadata1 {
 				S3CompatibleMetadata metadata = new S3CompatibleMetadata();
 				metadata.put("name", "Rison");
 				metadata.put("company", "hitachi vantara");
+				metadata.put("comment", "此处默认为<utf-8>编码！");
+				metadata.put("file", "测试文件");
 
 				// Put S3 Compatible METADATA with specific key
 				hcpClient.putMetadata(key, metadata);
@@ -76,7 +79,7 @@ public class RestExample_PutMetadata1 {
 				// *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
 
 				// 创建一个XML Document对象
-				Document doc = RestExample_PutMetadata2.createDocument();
+				Document doc = RestExample_PutMetadataWithFile.createDocument();
 
 				// Put Custom METADATA with specific key
 				hcpClient.putMetadata(new PutMetadataRequest(key, "metadata2", MetadataUtils.toByteArray(doc)));
@@ -88,6 +91,7 @@ public class RestExample_PutMetadata1 {
 				// Verify contents.
 				assertTrue("Rison".equals(metadataFromHCP.get("name")));
 				assertTrue("hitachi vantara".equals(metadataFromHCP.get("company")));
+				assertTrue("此处默认为<utf-8>编码！".equals(metadataFromHCP.get("comment")));
 
 				// *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
 

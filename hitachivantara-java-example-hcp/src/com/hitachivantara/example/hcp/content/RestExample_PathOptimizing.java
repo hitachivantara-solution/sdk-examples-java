@@ -82,7 +82,7 @@ public class RestExample_PathOptimizing {
 		// Here is the file will be uploaded into HCP
 		File file = Account.localFile1;
 		// The location in HCP where this file will be stored.
-		String key = file.getName();
+		String key = "/"+file.getName();
 
 		{
 			// Check whether object exist.

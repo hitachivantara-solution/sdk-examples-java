@@ -93,12 +93,14 @@ public class RestExample_PutGetDeleteObject {
 				hcpClient.putObject(key, file);
 
 				// Check whether object exist.
-				boolean exist = hcpClient.doesObjectExist(key);
-				assertTrue(exist == true);
+//				boolean exist = hcpClient.doesObjectExist(key);
+//				assertTrue(exist == true);
 
 				// Get the object from HCP
 				hcpObject = hcpClient.getObject(key);
 			} catch (InvalidResponseException e) {
+//				e.getReason()
+//				e.getStatusCode()
 				e.printStackTrace();
 			} catch (HSCException e) {
 				e.printStackTrace();
@@ -130,8 +132,8 @@ public class RestExample_PutGetDeleteObject {
 //			 hcpClient.deleteObject(new DeleteObjectRequest(key).withPurge(true));
 			//
 			// Check whether object exist.
-			boolean exist = hcpClient.doesObjectExist(key);
-			assertTrue(exist == false);
+//			boolean exist = hcpClient.doesObjectExist(key);
+//			assertTrue(exist == false);
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

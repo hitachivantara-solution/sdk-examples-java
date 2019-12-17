@@ -95,8 +95,8 @@ public class S3Example_PutGetDeleteObject {
 				hs3Client.putObject(bucketName, key, file);
 
 				// Check whether object exist.
-				boolean exist = hs3Client.doesObjectExist(bucketName, key);
-				assertTrue(exist == true);
+//				boolean exist = hs3Client.doesObjectExist(bucketName, key);
+//				assertTrue(exist == true);
 
 				// Get the object from HCP
 				s3Object = hs3Client.getObject(bucketName, key);
@@ -128,8 +128,8 @@ public class S3Example_PutGetDeleteObject {
 			hs3Client.deleteObject(bucketName, key);
 			
 			// Check whether object exist.
-			boolean exist = hs3Client.doesObjectExist(bucketName, key);
-			assertTrue(exist == false);
+//			boolean exist = hs3Client.doesObjectExist(bucketName, key);
+//			assertTrue(exist == false);
 		}
 		
 		System.out.println("Well done!");
